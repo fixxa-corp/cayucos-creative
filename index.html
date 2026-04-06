@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cayucos Creative — Web & Marketing for Local Business</title>
+  <meta name="description" content="We build, manage, and grow the web presence of small businesses on the Central Coast. Websites, Google Business, social media, email marketing — all of it, handled." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['Cormorant Garamond', 'serif'],
+            sans: ['DM Sans', 'sans-serif'],
+          },
+          colors: {
+            sand: '#F5EFE6',
+            driftwood: '#B5956A',
+            kelp: '#4A5E4A',
+            fog: '#E8EAE6',
+            tide: '#2C3E35',
+            salt: '#FAFAF8',
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    .wave-divider {
+      width: 100%;
+      overflow: hidden;
+      line-height: 0;
+    }
+    .wave-divider svg {
+      display: block;
+      width: 100%;
+    }
+    .grain {
+      position: relative;
+    }
+    .grain::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      opacity: 0.4;
+      pointer-events: none;
+      z-index: 0;
+    }
+  </style>
+</head>
+<body class="font-sans bg-salt text-tide antialiased">
+
+  <!-- Nav -->
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-salt/90 backdrop-blur-sm border-b border-fog">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="#" class="font-serif text-2xl font-semibold tracking-wide text-tide">
+        Cayucos Creative
+      </a>
+      <div class="hidden md:flex items-center gap-8 text-sm font-medium text-tide/70">
+        <a href="#services" class="hover:text-tide transition-colors">Services</a>
+        <a href="#how" class="hover:text-tide transition-colors">How It Works</a>
+        <a href="#pricing" class="hover:text-tide transition-colors">Pricing</a>
+        <a href="#contact" class="bg-tide text-salt px-5 py-2.5 rounded-full hover:bg-kelp transition-colors">Get Started</a>
+      </div>
+      <!-- Mobile menu button -->
+      <a href="#contact" class="md:hidden bg-tide text-salt px-4 py-2 rounded-full text-sm font-medium">Get Started</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="grain pt-32 pb-24 px-6 bg-sand min-h-screen flex items-center relative overflow-hidden">
+    <!-- Background texture circles -->
+    <div class="absolute top-20 right-0 w-96 h-96 rounded-full bg-driftwood/10 blur-3xl"></div>
+    <div class="absolute bottom-10 left-10 w-64 h-64 rounded-full bg-kelp/10 blur-3xl"></div>
+
+    <div class="max-w-6xl mx-auto relative z-10 grid md:grid-cols-2 gap-16 items-center">
+      <div>
+        <p class="text-driftwood font-medium text-sm tracking-widest uppercase mb-4">Central Coast Web & Marketing</p>
+        <h1 class="font-serif text-6xl md:text-7xl leading-tight mb-6">
+          Your business deserves a <em>real</em> web presence.
+        </h1>
+        <p class="text-tide/70 text-xl leading-relaxed mb-10 max-w-lg">
+          We build, manage, and grow websites, Google listings, social media, and email marketing for small businesses on the Central Coast — so you can focus on what you're actually good at.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="#contact" class="bg-tide text-salt px-8 py-4 rounded-full text-base font-medium hover:bg-kelp transition-colors text-center">
+            Get a free website audit →
+          </a>
+          <a href="#services" class="border border-tide/30 text-tide px-8 py-4 rounded-full text-base font-medium hover:border-tide transition-colors text-center">
+            See what we do
+          </a>
+        </div>
+        <p class="mt-6 text-sm text-tide/50">No obligation. No upfront cost. Just honest help.</p>
+      </div>
+
+      <div class="hidden md:block">
+        <!-- Stylized "business card" mockup -->
+        <div class="bg-white rounded-3xl shadow-2xl p-8 rotate-2 border border-fog">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-3 h-3 rounded-full bg-red-300"></div>
+            <div class="w-3 h-3 rounded-full bg-yellow-300"></div>
+            <div class="w-3 h-3 rounded-full bg-green-300"></div>
+          </div>
+          <div class="bg-sand rounded-2xl p-6 mb-4">
+            <div class="text-xs text-tide/40 mb-2 font-medium uppercase tracking-wider">yourlocalbusiness.com</div>
+            <div class="h-3 bg-driftwood/30 rounded-full w-3/4 mb-2"></div>
+            <div class="h-3 bg-driftwood/20 rounded-full w-1/2 mb-4"></div>
+            <div class="grid grid-cols-3 gap-2">
+              <div class="h-16 bg-kelp/20 rounded-xl"></div>
+              <div class="h-16 bg-driftwood/20 rounded-xl"></div>
+              <div class="h-16 bg-tide/10 rounded-xl"></div>
+            </div>
+          </div>
+          <div class="flex items-center justify-between">
+            <div>
+              <div class="h-2.5 bg-tide/20 rounded-full w-24 mb-1.5"></div>
+              <div class="h-2 bg-tide/10 rounded-full w-16"></div>
+            </div>
+            <div class="bg-kelp text-salt text-xs px-4 py-2 rounded-full font-medium">Live ✓</div>
+          </div>
+        </div>
+        <!-- Google rating card -->
+        <div class="bg-white rounded-2xl shadow-lg p-5 -mt-4 ml-8 -rotate-1 border border-fog">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-fog rounded-full flex items-center justify-center text-lg">G</div>
+            <div>
+              <div class="text-sm font-semibold text-tide">Google Business</div>
+              <div class="flex gap-0.5 mt-0.5">
+                <span class="text-yellow-400 text-sm">★★★★★</span>
+                <span class="text-xs text-tide/50 ml-1">4.9 (87 reviews)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Wave -->
+  <div class="wave-divider bg-sand">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,30 C360,60 1080,0 1440,30 L1440,60 L0,60 Z" fill="#FAFAF8"/>
+    </svg>
+  </div>
+
+  <!-- Social proof strip -->
+  <section class="py-10 px-6 bg-salt">
+    <div class="max-w-6xl mx-auto text-center">
+      <p class="text-sm text-tide/40 font-medium uppercase tracking-widest mb-8">Built for businesses like yours</p>
+      <div class="flex flex-wrap justify-center gap-8 text-tide/30 font-serif text-lg italic">
+        <span>Restaurants</span>
+        <span>·</span>
+        <span>Surf Shops</span>
+        <span>·</span>
+        <span>Contractors</span>
+        <span>·</span>
+        <span>Spas & Salons</span>
+        <span>·</span>
+        <span>Galleries</span>
+        <span>·</span>
+        <span>Vacation Rentals</span>
+        <span>·</span>
+        <span>Retail</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="services" class="py-24 px-6 bg-salt">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16">
+        <p class="text-driftwood font-medium text-sm tracking-widest uppercase mb-3">What We Do</p>
+        <h2 class="font-serif text-5xl mb-4">Everything. We handle everything.</h2>
+        <p class="text-tide/60 text-lg max-w-xl mx-auto">One team. One monthly retainer. Total coverage of your online presence.</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+        <div class="bg-sand rounded-3xl p-8 hover:shadow-lg transition-shadow">
+          <div class="w-12 h-12 bg-driftwood/20 rounded-2xl flex items-center justify-center mb-6">
+            <svg class="w-6 h-6 text-driftwood" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+            </svg>
+          </div>
+          <h3 class="font-serif text-2xl mb-3">Website</h3>
+          <p class="text-tide/60 text-sm leading-relaxed">Custom-designed, mobile-first websites that load fast and look great. We build it, host it, update it, and keep it running.</p>
+        </div>
+
+        <div class="bg-fog rounded-3xl p-8 hover:shadow-lg transition-shadow">
+          <div class="w-12 h-12 bg-kelp/20 rounded-2xl flex items-center justify-center mb-6">
+            <svg class="w-6 h-6 text-kelp" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+            </svg>
+          </div>
+          <h3 class="font-serif text-2xl mb-3">Google Business</h3>
+          <p class="text-tide/60 text-sm leading-relaxed">Optimized Google Business Profile so you show up in local searches and Maps. Reviews, photos, posts — we manage it all.</p>
+        </div>
+
+        <div class="bg-sand rounded-3xl p-8 hover:shadow-lg transition-shadow">
+          <div class="w-12 h-12 bg-driftwood/20 rounded-2xl flex items-center justify-center mb-6">
+            <svg class="w-6 h-6 text-driftwood" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+            </svg>
+          </div>
+          <h3 class="font-serif text-2xl mb-3">Social Media</h3>
+          <p class="text-tide/60 text-sm leading-relaxed">Consistent, on-brand content for Instagram, Facebook, and more. We create it, post it, and grow your following.</p>
+        </div>
+
+        <div class="bg-fog rounded-3xl p-8 hover:shadow-lg transition-shadow">
+          <div class="w-12 h-12 bg-kelp/20 rounded-2xl flex items-center justify-center mb-6">
+            <svg class="w-6 h-6 text-kelp" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+            </svg>
+          </div>
+          <h3 class="font-serif text-2xl mb-3">Email Marketing</h3>
+          <p class="text-tide/60 text-sm leading-relaxed">Newsletters and campaigns that actually get opened. Build a list, stay top of mind, drive repeat business.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section id="how" class="py-24 px-6 bg-sand">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-16">
+        <p class="text-driftwood font-medium text-sm tracking-widest uppercase mb-3">The Process</p>
+        <h2 class="font-serif text-5xl mb-4">Simple as a walk on the pier.</h2>
+      </div>
+
+      <div class="space-y-6">
+        <div class="bg-salt rounded-3xl p-8 flex gap-6 items-start">
+          <div class="w-12 h-12 bg-tide text-salt rounded-2xl flex items-center justify-center font-serif text-xl font-semibold flex-shrink-0">1</div>
+          <div>
+            <h3 class="font-serif text-2xl mb-2">Free audit & conversation</h3>
+            <p class="text-tide/60 leading-relaxed">We look at your current web presence (or lack of one), talk about your business, and tell you exactly what we'd do and why. No charge, no pressure.</p>
+          </div>
+        </div>
+        <div class="bg-salt rounded-3xl p-8 flex gap-6 items-start">
+          <div class="w-12 h-12 bg-tide text-salt rounded-2xl flex items-center justify-center font-serif text-xl font-semibold flex-shrink-0">2</div>
+          <div>
+            <h3 class="font-serif text-2xl mb-2">We build. You approve.</h3>
+            <p class="text-tide/60 leading-relaxed">We design your site, set up your profiles, and create your content. You see it before anything goes live. Revisions until it's right.</p>
+          </div>
+        </div>
+        <div class="bg-salt rounded-3xl p-8 flex gap-6 items-start">
+          <div class="w-12 h-12 bg-tide text-salt rounded-2xl flex items-center justify-center font-serif text-xl font-semibold flex-shrink-0">3</div>
+          <div>
+            <h3 class="font-serif text-2xl mb-2">We manage. You relax.</h3>
+            <p class="text-tide/60 leading-relaxed">One flat monthly fee. We handle updates, posts, emails, and optimizations. You get a monthly report. That's it.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section id="pricing" class="py-24 px-6 bg-salt">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16">
+        <p class="text-driftwood font-medium text-sm tracking-widest uppercase mb-3">Pricing</p>
+        <h2 class="font-serif text-5xl mb-4">Flat monthly rate. No surprises.</h2>
+        <p class="text-tide/60 text-lg max-w-xl mx-auto">No setup fees. No long-term contracts. Cancel anytime — though you won't want to.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+
+        <!-- Starter -->
+        <div class="border border-fog rounded-3xl p-8 hover:border-driftwood/40 transition-colors">
+          <p class="text-sm font-medium text-driftwood uppercase tracking-widest mb-4">Starter</p>
+          <div class="font-serif text-5xl mb-2">$299<span class="text-xl text-tide/40">/mo</span></div>
+          <p class="text-tide/50 text-sm mb-8">Perfect for getting found online</p>
+          <ul class="space-y-3 text-sm text-tide/70 mb-10">
+            <li class="flex items-start gap-2"><span class="text-kelp mt-0.5">✓</span> 5-page custom website</li>
+            <li class="flex items-start gap-2"><span class="text-kelp mt-0.5">✓</span> Google Business setup & optimization</li>
+            <li class="flex items-start gap-2"><span class="text-kelp mt-0.5">✓</span> Hosting & maintenance included</li>
+            <li class="flex items-start gap-2"><span class="text-kelp mt-0.5">✓</span> Monthly content updates</li>
+          </ul>
+          <a href="#contact" class="block text-center border border-tide text-tide px-6 py-3 rounded-full text-sm font-medium hover:bg-tide hover:text-salt transition-colors">Get started</a>
+        </div>
+
+        <!-- Growth (featured) -->
+        <div class="bg-tide text-salt rounded-3xl p-8 relative">
+          <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-driftwood text-salt text-xs font-medium px-4 py-1.5 rounded-full">Most Popular</div>
+          <p class="text-sm font-medium text-salt/60 uppercase tracking-widest mb-4">Growth</p>
+          <div class="font-serif text-5xl mb-2">$599<span class="text-xl text-salt/40">/mo</span></div>
+          <p class="text-salt/50 text-sm mb-8">Full presence, managed for you</p>
+          <ul class="space-y-3 text-sm text-salt/80 mb-10">
+            <li class="flex items-start gap-2"><span class="text-driftwood mt-0.5">✓</span> Everything in Starter</li>
+            <li class="flex items-start gap-2"><span class="text-driftwood mt-0.5">✓</span> Instagram & Facebook management</li>
+            <li class="flex items-start gap-2"><span class="text-driftwood mt-0.5">✓</span> 8 social posts/month</li>
+            <li class="flex items-start gap-2"><span class="text-driftwood mt-0.5">✓</span> Monthly email newsletter</li>
+            <li class="flex items-start gap-2"><span class="text-driftwood mt-0.5">✓</span> Monthly performance report</li>
+          </ul>
+          <a href="#contact" class="block text-center bg-salt text-tide px-6 py-3 rounded-full text-sm font-medium hover:bg-fog transition-colors">Get started</a>
+        </div>
+
+        <!-- Full Service -->
+        <div class="border border-fog rounded-3xl p-8 hover:border-driftwood/40 transition-colors">
+          <p class="text-sm font-medium text-driftwood uppercase tracking-widest mb-4">Full Service</p>
+          <div class="font-serif text-5xl mb-2">$999<span class="text-xl text-tide/40">/mo</span></div>
+          <p class="text-tide/50 text-sm mb-8">Your outsourced marketing department</p>
+          <ul class="space-y-3 text-sm text-tide/70 mb-10">
+            <li class="flex items-start gap-2"><span class="text-kelp mt-0.5">✓</span> Everything in Growth</li>
+            <li class="flex items-start gap-2"><span class="text-kelp mt-0.5">✓</span> 16 social posts/month</li>
+            <li class="flex items-start gap-2"><span class="text-kelp mt-0.5">✓</span> Weekly email campaigns</li>
+            <li class="flex items-start gap-2"><span class="text-kelp mt-0.5">✓</span> Ad campaign management</li>
+            <li class="flex items-start gap-2"><span class="text-kelp mt-0.5">✓</span> Priority support</li>
+          </ul>
+          <a href="#contact" class="block text-center border border-tide text-tide px-6 py-3 rounded-full text-sm font-medium hover:bg-tide hover:text-salt transition-colors">Get started</a>
+        </div>
+
+      </div>
+      <p class="text-center text-tide/40 text-sm mt-8">Not sure which plan? Start with a free audit and we'll recommend the right fit.</p>
+    </div>
+  </section>
+
+  <!-- CTA / Contact -->
+  <section id="contact" class="py-24 px-6 bg-sand">
+    <div class="max-w-2xl mx-auto text-center">
+      <p class="text-driftwood font-medium text-sm tracking-widest uppercase mb-4">Let's Talk</p>
+      <h2 class="font-serif text-5xl mb-6">Ready for a web presence that actually works?</h2>
+      <p class="text-tide/60 text-lg mb-12">Get a free audit of your current online presence — no strings attached. We'll tell you what's working, what's not, and what we'd do about it.</p>
+
+      <form class="text-left bg-salt rounded-3xl p-8 shadow-sm border border-fog" action="#" method="POST">
+        <div class="grid sm:grid-cols-2 gap-4 mb-4">
+          <div>
+            <label class="block text-xs font-medium text-tide/60 uppercase tracking-wider mb-2">Your Name</label>
+            <input type="text" placeholder="Jane Smith" class="w-full bg-fog border-0 rounded-2xl px-4 py-3 text-tide placeholder-tide/30 focus:outline-none focus:ring-2 focus:ring-driftwood/40 text-sm" />
+          </div>
+          <div>
+            <label class="block text-xs font-medium text-tide/60 uppercase tracking-wider mb-2">Business Name</label>
+            <input type="text" placeholder="Smith's Surf Shop" class="w-full bg-fog border-0 rounded-2xl px-4 py-3 text-tide placeholder-tide/30 focus:outline-none focus:ring-2 focus:ring-driftwood/40 text-sm" />
+          </div>
+        </div>
+        <div class="mb-4">
+          <label class="block text-xs font-medium text-tide/60 uppercase tracking-wider mb-2">Email or Phone</label>
+          <input type="text" placeholder="jane@example.com or (805) 555-0123" class="w-full bg-fog border-0 rounded-2xl px-4 py-3 text-tide placeholder-tide/30 focus:outline-none focus:ring-2 focus:ring-driftwood/40 text-sm" />
+        </div>
+        <div class="mb-6">
+          <label class="block text-xs font-medium text-tide/60 uppercase tracking-wider mb-2">Current Website (if any)</label>
+          <input type="text" placeholder="yoursite.com or 'none yet'" class="w-full bg-fog border-0 rounded-2xl px-4 py-3 text-tide placeholder-tide/30 focus:outline-none focus:ring-2 focus:ring-driftwood/40 text-sm" />
+        </div>
+        <button type="submit" class="w-full bg-tide text-salt py-4 rounded-full font-medium hover:bg-kelp transition-colors">
+          Request my free audit →
+        </button>
+        <p class="text-center text-xs text-tide/30 mt-4">We'll get back to you within 24 hours.</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-12 px-6 bg-tide text-salt/60">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+      <div>
+        <p class="font-serif text-2xl text-salt mb-1">Cayucos Creative</p>
+        <p class="text-sm">Web & Marketing for the Central Coast</p>
+      </div>
+      <div class="flex gap-8 text-sm">
+        <a href="#services" class="hover:text-salt transition-colors">Services</a>
+        <a href="#how" class="hover:text-salt transition-colors">How It Works</a>
+        <a href="#pricing" class="hover:text-salt transition-colors">Pricing</a>
+        <a href="#contact" class="hover:text-salt transition-colors">Contact</a>
+      </div>
+      <p class="text-xs text-salt/30">© 2026 Cayucos Creative. Made with salt air.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
