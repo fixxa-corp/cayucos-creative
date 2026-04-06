@@ -1,1030 +1,440 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kai Shave Ice — Morro Bay, CA</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Inter:wght@400;700;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <meta name="description" content="Hawaiian-style shave ice in Morro Bay, CA. House-made syrups, hand-shaved ice. Open daily until sold out." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            cream:    '#FEF3C7',
-            brand:    '#78350F',
-            'brand-dark': '#451A03',
-            ocean:    '#0EA5E9',
-            coral:    '#FB923C',
-            mint:     '#34D399',
-            sunshine: '#FBBF24',
-          },
-          fontFamily: {
-            pacifico: ['Pacifico', 'cursive'],
-            inter:    ['Inter', 'sans-serif'],
-            lato:     ['Lato', 'sans-serif'],
-          },
-        }
-      }
-    }
-  </script>
   <style>
-    /* ── ANIMATIONS ───────────────────────────────── */
-    @keyframes float {
-      0%,100% { transform: translateY(0); }
-      50%     { transform: translateY(-14px); }
+    :root {
+      --cream: #F5F0E1;
+      --brown: #3E2723;
+      --brown-mid: #78350F;
+      --red: #E8432D;
+      --yellow: #F5B731;
+      --blue: #38BDF8;
+      --blue-deep: #0284C7;
     }
-    @keyframes floatTilt {
-      0%,100% { transform: translateY(0) rotate(-5deg); }
-      50%     { transform: translateY(-12px) rotate(5deg) scale(1.02); }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--cream); color: var(--brown); font-family: 'DM Sans', sans-serif; overflow-x: hidden; }
+
+    /* ── REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.on { opacity: 1; transform: none; }
+
+    /* ── FLOAT ── */
+    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-14px)} }
+    .float { animation: float 4s ease-in-out infinite; }
+
+    /* ── SPIN SLOW ── */
+    @keyframes spin-slow { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+    .spin-slow { animation: spin-slow 18s linear infinite; }
+
+    /* ── MARQUEE ── */
+    @keyframes mq { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+    .mq { animation: mq 20s linear infinite; display:flex; white-space:nowrap; }
+
+    /* ── DRIP ── */
+    @keyframes drip { 0%,100%{transform:scaleY(1)} 50%{transform:scaleY(1.04)} }
+
+    /* ── WAVE BG ── */
+    .wave-bg {
+      background-image: radial-gradient(ellipse at 20% 80%, rgba(56,189,248,.12) 0%, transparent 50%),
+                        radial-gradient(ellipse at 80% 20%, rgba(232,67,45,.08) 0%, transparent 50%),
+                        radial-gradient(ellipse at 50% 50%, rgba(245,183,49,.06) 0%, transparent 60%);
     }
-    @keyframes sparkleAnim {
-      0%,100% { opacity:1; transform:scale(1) rotate(0deg); }
-      50%     { opacity:.35; transform:scale(.65) rotate(22deg); }
-    }
+
+    /* ── FLAVOR CARD ── */
+    .flavor-card { transition: transform .2s ease, box-shadow .2s ease; cursor:default; }
+    .flavor-card:hover { transform: translateY(-6px) rotate(1deg); box-shadow: 0 20px 40px rgba(62,39,35,.15); }
+
+    /* ── BUTTON ── */
+    .btn { transition: transform .15s ease, background .2s ease, color .2s ease; cursor: pointer; }
+    .btn:hover { transform: scale(1.04); }
+    .btn:active { transform: scale(0.97); }
+
+    /* ── IG CELL ── */
+    .ig-cell { transition: transform .25s ease, brightness .25s; cursor:pointer; }
+    .ig-cell:hover { transform: scale(1.03); filter: brightness(1.06); }
+
+    /* ── SQUIGGLE ── */
+    .squiggle { stroke-dasharray: 1000; stroke-dashoffset: 1000; transition: stroke-dashoffset 1.5s ease; }
+    .squiggle.on { stroke-dashoffset: 0; }
 
     @media (prefers-reduced-motion: reduce) {
-      *,*::before,*::after {
-        animation-duration:.01ms!important;
-        animation-iteration-count:1!important;
-        transition-duration:.01ms!important;
-      }
+      .reveal { opacity:1; transform:none; transition:none; }
+      .float, .spin-slow, .mq { animation:none; }
+      .flavor-card, .btn, .ig-cell { transition:none; }
     }
 
-    .animate-float      { animation: float 4s ease-in-out infinite; }
-    .animate-float-tilt { animation: floatTilt 4s ease-in-out infinite; }
-    .animate-sparkle    { animation: sparkleAnim 2.5s ease-in-out infinite; }
-    .sp2 { animation-delay:.5s; }
-    .sp3 { animation-delay:1s; }
-    .sp4 { animation-delay:1.5s; }
-    .sp5 { animation-delay:.8s; }
-    .sp6 { animation-delay:.3s; }
-
-    /* ── SCROLL REVEAL ────────────────────────────── */
-    .reveal {
-      opacity:0; transform:translateY(38px);
-      transition: opacity .7s cubic-bezier(.22,1,.36,1),
-                  transform .7s cubic-bezier(.22,1,.36,1);
-    }
-    .reveal.visible { opacity:1; transform:translateY(0); }
-    .rd1 { transition-delay:.06s; }
-    .rd2 { transition-delay:.13s; }
-    .rd3 { transition-delay:.20s; }
-    .rd4 { transition-delay:.27s; }
-    .rd5 { transition-delay:.34s; }
-    .rd6 { transition-delay:.41s; }
-    .rd7 { transition-delay:.48s; }
-    .rd8 { transition-delay:.55s; }
-    .rd9 { transition-delay:.62s; }
-    .rd10{ transition-delay:.69s; }
-
-    /* ── WAVE BG ──────────────────────────────────── */
-    .wave-pattern {
-      background-image:
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='54'%3E%3Cpath d='M0 27 Q80 8 160 27 Q240 46 320 27' fill='none' stroke='%2378350F' stroke-width='.6' stroke-opacity='.07'/%3E%3C/svg%3E");
-      background-size: 320px 54px;
-    }
-
-    /* ── CARDS & INTERACTIVES ─────────────────────── */
-    .flavor-card {
-      transition: transform .22s cubic-bezier(.34,1.56,.64,1),
-                  box-shadow .22s ease;
-      cursor: pointer;
-    }
-    .flavor-card:hover {
-      transform: scale(1.05) translateY(-5px);
-      box-shadow: 0 24px 52px -6px rgba(120,53,15,.2);
-    }
-
-    .ig-cell {
-      transition: transform .25s ease, filter .25s ease;
-      cursor: pointer;
-    }
-    .ig-cell:hover {
-      transform: scale(1.03);
-      filter: brightness(1.08) saturate(1.12);
-    }
-
-    .btn-primary {
-      background:#0EA5E9; color:#fff;
-      transition: background .2s ease,
-                  transform .22s cubic-bezier(.34,1.56,.64,1),
-                  box-shadow .2s ease;
-      cursor: pointer;
-    }
-    .btn-primary:hover {
-      background:#0284C7;
-      transform: translateY(-3px) scale(1.02);
-      box-shadow: 0 14px 34px rgba(14,165,233,.44);
-    }
-
-    .btn-outline {
-      border:2px solid #78350F; color:#78350F; background:transparent;
-      transition: all .2s ease; cursor:pointer;
-    }
-    .btn-outline:hover {
-      background:#78350F; color:#FEF3C7;
-      transform:translateY(-3px);
-      box-shadow:0 10px 24px rgba(120,53,15,.28);
-    }
-
-    .btn-ig {
-      background: linear-gradient(135deg,#f58529,#dd2a7b,#8134af,#515bd4);
-      color:#fff;
-      transition: transform .22s cubic-bezier(.34,1.56,.64,1),
-                  box-shadow .2s ease, filter .2s ease;
-      cursor:pointer;
-    }
-    .btn-ig:hover {
-      transform:translateY(-3px) scale(1.03);
-      box-shadow:0 14px 34px rgba(221,42,123,.38);
-      filter:brightness(1.08);
-    }
-
-    .nav-link { color:rgba(120,53,15,.58); transition:color .2s ease; cursor:pointer; }
-    .nav-link:hover { color:#0EA5E9; }
-
-    .pill-tag {
-      display:inline-block;
-      transition:transform .2s ease, box-shadow .2s ease;
-    }
-    .pill-tag:hover {
-      transform:translateY(-2px) scale(1.06);
-      box-shadow:0 4px 14px rgba(0,0,0,.18);
-    }
-
-    .stat-tile {
-      transition:transform .2s ease, box-shadow .2s ease;
-    }
-    .stat-tile:hover {
-      transform:translateY(-4px);
-      box-shadow:0 10px 28px rgba(120,53,15,.14);
-    }
-
-    .find-card {
-      transition:transform .2s ease, box-shadow .2s ease;
-      cursor:default;
-    }
-    .find-card:hover {
-      transform:translateY(-5px);
-      box-shadow:0 22px 46px rgba(0,0,0,.16);
-    }
-
-    .nav-cta-btn {
-      transition: all .2s ease; cursor:pointer;
-    }
-    .nav-cta-btn:hover {
-      background:#451A03!important;
-      transform:translateY(-2px);
-      box-shadow:0 6px 18px rgba(120,53,15,.3);
-    }
-
-    html { scroll-behavior:smooth; }
-    body { font-family:'Lato',sans-serif; }
+    *:focus-visible { outline: 3px solid var(--yellow); outline-offset: 3px; }
   </style>
 </head>
-<body class="overflow-x-hidden bg-white">
+<body>
 
-<!-- =============================================
-     NAV
-============================================= -->
-<nav class="sticky top-0 z-50 bg-white/96 backdrop-blur-md shadow-sm">
-  <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
-    <div class="flex items-center justify-between h-[68px]">
-
-      <!-- Logo (left) -->
-      <a href="#home" class="flex-shrink-0 cursor-pointer" aria-label="Kai Shave Ice Home">
-        <!-- LOGO SVG -->
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" height="52" style="height:52px;width:auto;display:block;">
-          <defs>
-            <path id="tArc" d="M22,90 A68,68 0 0,0 158,90"/>
-            <path id="bArc" d="M22,90 A68,68 0 0,1 158,90"/>
-            <clipPath id="ldc">
-              <path d="M66,84 C58,70 56,52 90,39 C124,52 122,70 114,84 Z"/>
-            </clipPath>
-          </defs>
-          <!-- Outer badge ring -->
-          <circle cx="90" cy="90" r="87" fill="#FEF3C7" stroke="#78350F" stroke-width="3.5"/>
-          <!-- Dashed inner ring -->
-          <circle cx="90" cy="90" r="78" fill="none" stroke="#78350F" stroke-width="1" stroke-dasharray="3,4"/>
-
-          <!-- Arc text — top -->
-          <text font-family="Inter,sans-serif" font-weight="900" font-size="11" fill="#78350F" letter-spacing="3">
-            <textPath href="#tArc" startOffset="50%" text-anchor="middle">KAI SHAVE ICE</textPath>
-          </text>
-          <!-- Arc text — bottom -->
-          <text font-family="Inter,sans-serif" font-weight="700" font-size="9.5" fill="#78350F" letter-spacing="2">
-            <textPath href="#bArc" startOffset="50%" text-anchor="middle">MORRO BAY, CA</textPath>
-          </text>
-
-          <!-- Mini mascot -->
-          <!-- stick -->
-          <rect x="87" y="115" width="6" height="18" rx="2" fill="#92400E"/>
-          <!-- cup -->
-          <path d="M66,84 L74,115 L106,115 L114,84 Z" fill="white" stroke="#E5E7EB" stroke-width=".7"/>
-          <!-- ice dome layers -->
-          <rect x="55" y="39" width="70" height="19" fill="#38BDF8" clip-path="url(#ldc)"/>
-          <rect x="55" y="58" width="70" height="14" fill="#FBBF24" clip-path="url(#ldc)"/>
-          <rect x="55" y="72" width="70" height="16" fill="#FB923C" clip-path="url(#ldc)"/>
-          <!-- dome outline -->
-          <path d="M66,84 C58,70 56,52 90,39 C124,52 122,70 114,84 Z" fill="none" stroke="white" stroke-width=".8" opacity=".5"/>
-          <!-- cup face -->
-          <circle cx="83" cy="100" r="5" fill="#FCA5A5" opacity=".4"/>
-          <circle cx="97" cy="100" r="5" fill="#FCA5A5" opacity=".4"/>
-          <circle cx="85"  cy="98"  r="2.5" fill="#451A03"/>
-          <circle cx="95"  cy="98"  r="2.5" fill="#451A03"/>
-          <circle cx="86.2" cy="96.8" r=".9" fill="white"/>
-          <circle cx="96.2" cy="96.8" r=".9" fill="white"/>
-          <path d="M85,106 Q90,112 95,106" fill="none" stroke="#451A03" stroke-width="1.6" stroke-linecap="round"/>
-          <!-- stars -->
-          <text x="30" y="67" font-size="10" fill="#FBBF24">★</text>
-          <text x="136" y="67" font-size="10" fill="#FBBF24">★</text>
-        </svg>
+  <!-- ═══════════════════════════════════════ NAV ═══ -->
+  <nav style="background:var(--cream);border-bottom:2px solid var(--brown);" class="sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="#" class="cursor-pointer">
+        <img src="assets/logo.jpg" alt="Kai Shave Ice" style="height:52px;border-radius:50%;border:2px solid var(--brown);" />
       </a>
-
-      <!-- Center nav links (hidden mobile) -->
-      <div class="hidden md:flex items-center gap-8">
-        <a href="#flavors"  class="nav-link font-inter font-bold text-xs uppercase tracking-[.2em]">Flavors</a>
-        <a href="#about"    class="nav-link font-inter font-bold text-xs uppercase tracking-[.2em]">About</a>
-        <a href="#find-us"  class="nav-link font-inter font-bold text-xs uppercase tracking-[.2em]">Find Us</a>
+      <div class="hidden md:flex items-center gap-8 text-sm font-bold uppercase tracking-widest" style="color:var(--brown-mid)">
+        <a href="#flavors" class="hover:text-[var(--red)] transition-colors cursor-pointer">Flavors</a>
+        <a href="#story" class="hover:text-[var(--red)] transition-colors cursor-pointer">About</a>
+        <a href="#find" class="hover:text-[var(--red)] transition-colors cursor-pointer">Find Us</a>
       </div>
-
-      <!-- Right CTA -->
-      <a href="#find-us"
-         class="nav-cta-btn inline-block px-5 py-2.5 rounded-full font-inter font-bold text-sm"
-         style="background:#78350F;color:#FEF3C7;">
+      <a href="#find" class="btn text-sm font-bold uppercase tracking-widest px-5 py-2.5 rounded-full" style="background:var(--brown);color:var(--cream)">
         Find Us
       </a>
-
     </div>
-  </div>
-</nav>
+  </nav>
 
+  <!-- ═══════════════════════════════════════ HERO ═══ -->
+  <section class="wave-bg relative overflow-hidden" style="min-height:100svh;display:flex;align-items:center;">
 
-<!-- =============================================
-     HERO
-============================================= -->
-<section id="home" class="relative min-h-screen flex items-center bg-cream wave-pattern overflow-hidden">
-  <!-- Decorative bg blobs -->
-  <div class="absolute -top-32 -right-32 w-[500px] h-[500px] rounded-full opacity-20" style="background:radial-gradient(circle,#38BDF8,transparent 70%);"></div>
-  <div class="absolute -bottom-24 -left-24 w-[400px] h-[400px] rounded-full opacity-15" style="background:radial-gradient(circle,#FB923C,transparent 70%);"></div>
+    <!-- Big decorative type in background -->
+    <div class="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden">
+      <p class="font-['Pacifico'] text-[22vw] leading-none opacity-[0.04]" style="color:var(--brown);white-space:nowrap">Kai</p>
+    </div>
 
-  <div class="max-w-7xl mx-auto px-6 lg:px-10 w-full py-20 lg:py-0">
-    <div class="flex flex-col lg:flex-row items-center gap-10 lg:gap-0 min-h-screen lg:min-h-0 py-24 lg:py-28">
+    <!-- Spinning badge in corner -->
+    <div class="absolute top-10 right-8 md:top-16 md:right-16 opacity-80 z-10">
+      <div class="spin-slow" style="width:90px;height:90px">
+        <img src="assets/logo.jpg" alt="" style="width:90px;height:90px;border-radius:50%;border:3px solid var(--brown)" />
+      </div>
+    </div>
 
-      <!-- LEFT — text 60% -->
-      <div class="lg:w-[58%] reveal">
-        <span class="font-inter font-bold text-ocean text-xs tracking-[.35em] uppercase block mb-5">
+    <div class="max-w-6xl mx-auto px-6 py-24 w-full grid md:grid-cols-2 gap-12 items-center">
+
+      <!-- LEFT -->
+      <div class="z-10">
+        <div class="inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-6 text-xs font-bold uppercase tracking-[.2em]" style="background:var(--blue);color:white">
           Morro Bay, California
-        </span>
+        </div>
 
-        <h1 class="font-pacifico text-brand leading-none mb-5"
-            style="font-size:clamp(4rem,11vw,9rem);letter-spacing:.025em;">
-          Shave Ice
+        <h1 class="font-['Pacifico'] leading-[.95] mb-4" style="font-size:clamp(3.5rem,9vw,7.5rem);color:var(--brown)">
+          Shave<br/>Ice.
         </h1>
 
-        <p class="font-inter font-black text-ocean mb-5"
-           style="font-size:clamp(1.1rem,2.5vw,1.6rem);">
-          Hawaiian style. California soul.
+        <!-- Ice stripe underline — matches their logo colors -->
+        <div class="flex h-3 rounded-full overflow-hidden w-48 mb-8" style="border:2px solid var(--brown)">
+          <div class="flex-1" style="background:var(--red)"></div>
+          <div class="flex-1" style="background:var(--yellow)"></div>
+          <div class="flex-2 flex-grow-[2]" style="background:var(--blue)"></div>
+        </div>
+
+        <p class="text-xl font-bold mb-2" style="color:var(--blue-deep)">Hawaiian style. California soul.</p>
+        <p class="text-lg leading-relaxed mb-10" style="color:var(--brown-mid);max-width:380px">
+          Fresh-shaved, made-to-order, house syrups. Right on the Central Coast. Come find us before we sell out.
         </p>
 
-        <p class="font-lato text-brand/60 text-lg mb-10 max-w-md leading-relaxed">
-          Fresh-shaved, hand-crafted, made-to-order.<br>Right here in Morro Bay.
-        </p>
-
-        <!-- CTAs -->
         <div class="flex flex-wrap gap-4 mb-10">
-          <a href="#flavors"
-             class="btn-primary inline-block px-9 py-4 rounded-full font-inter font-bold text-sm tracking-wide">
+          <a href="#flavors" class="btn font-bold px-7 py-3.5 rounded-full text-sm uppercase tracking-wider" style="background:var(--red);color:white">
             See Flavors
           </a>
-          <a href="#find-us"
-             class="btn-outline inline-block px-9 py-4 rounded-full font-inter font-bold text-sm tracking-wide">
+          <a href="#find" class="btn font-bold px-7 py-3.5 rounded-full text-sm uppercase tracking-wider" style="border:2px solid var(--brown);color:var(--brown);background:transparent">
             Find Us
           </a>
         </div>
 
-        <!-- Flavor pills -->
-        <div class="flex flex-wrap gap-2.5">
-          <span class="pill-tag px-4 py-1.5 rounded-full text-white font-inter font-bold text-xs" style="background:#F472B6;transform:rotate(-2deg);">Strawberry</span>
-          <span class="pill-tag px-4 py-1.5 rounded-full text-white font-inter font-bold text-xs" style="background:#FB923C;transform:rotate(1.5deg);">Mango 🤙</span>
-          <span class="pill-tag px-4 py-1.5 rounded-full text-white font-inter font-bold text-xs" style="background:#38BDF8;transform:rotate(-1deg);">Blue Coconut</span>
-          <span class="pill-tag px-4 py-1.5 rounded-full text-brand font-inter font-bold text-xs" style="background:#FBBF24;transform:rotate(2.5deg);">Lilikoi</span>
-          <span class="pill-tag px-4 py-1.5 rounded-full text-white font-inter font-bold text-xs" style="background:#34D399;transform:rotate(-1.5deg);">Matcha</span>
-          <span class="pill-tag px-4 py-1.5 rounded-full text-white font-inter font-bold text-xs" style="background:#EF4444;transform:rotate(2deg);">Tiger's Blood</span>
-          <span class="pill-tag px-4 py-1.5 rounded-full text-white font-inter font-bold text-xs" style="background:linear-gradient(90deg,#F472B6,#FB923C,#FBBF24,#34D399,#38BDF8,#A78BFA);transform:rotate(-2.5deg);">Rainbow</span>
+        <!-- Floating flavor pills -->
+        <div class="flex flex-wrap gap-2">
+          <span class="px-3 py-1 rounded-full text-xs font-bold text-white" style="background:var(--red);transform:rotate(-2deg)">Strawberry</span>
+          <span class="px-3 py-1 rounded-full text-xs font-bold text-white" style="background:#FB923C;transform:rotate(1deg)">Mango</span>
+          <span class="px-3 py-1 rounded-full text-xs font-bold text-white" style="background:var(--blue);transform:rotate(-1deg)">Blue Coconut</span>
+          <span class="px-3 py-1 rounded-full text-xs font-bold" style="background:var(--yellow);color:var(--brown);transform:rotate(2deg)">Lilikoi</span>
+          <span class="px-3 py-1 rounded-full text-xs font-bold text-white" style="background:#34D399;transform:rotate(-3deg)">Matcha</span>
+          <span class="px-3 py-1 rounded-full text-xs font-bold text-white" style="background:#A78BFA;transform:rotate(1.5deg)">Grape</span>
+          <span class="px-3 py-1 rounded-full text-xs font-bold text-white" style="background:#EF4444;transform:rotate(-1deg)">Tiger's Blood</span>
         </div>
       </div>
 
-      <!-- RIGHT — mascot 40% -->
-      <div class="lg:w-[42%] flex justify-center items-center relative" style="min-height:420px;">
-        <!-- Scattered sparkle stars -->
-        <svg class="absolute animate-sparkle sp2" style="top:8%;right:6%;width:36px;height:36px;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <path d="M12 1L13.8 8.8L22 12L13.8 15.2L12 23L10.2 15.2L2 12L10.2 8.8Z" fill="#FBBF24"/>
-        </svg>
-        <svg class="absolute animate-sparkle sp3" style="top:22%;left:2%;width:22px;height:22px;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <path d="M12 1L13.8 8.8L22 12L13.8 15.2L12 23L10.2 15.2L2 12L10.2 8.8Z" fill="#34D399"/>
-        </svg>
-        <svg class="absolute animate-sparkle sp4" style="bottom:18%;right:4%;width:28px;height:28px;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <path d="M12 1L13.8 8.8L22 12L13.8 15.2L12 23L10.2 15.2L2 12L10.2 8.8Z" fill="#FB923C"/>
-        </svg>
-        <svg class="absolute animate-sparkle sp5" style="bottom:34%;left:1%;width:19px;height:19px;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <path d="M12 1L13.8 8.8L22 12L13.8 15.2L12 23L10.2 15.2L2 12L10.2 8.8Z" fill="#F472B6"/>
-        </svg>
-        <svg class="absolute animate-sparkle" style="top:42%;right:2%;width:17px;height:17px;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <path d="M12 1L13.8 8.8L22 12L13.8 15.2L12 23L10.2 15.2L2 12L10.2 8.8Z" fill="#0EA5E9"/>
-        </svg>
-        <svg class="absolute animate-sparkle sp6" style="top:6%;left:15%;width:14px;height:14px;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <path d="M12 1L13.8 8.8L22 12L13.8 15.2L12 23L10.2 15.2L2 12L10.2 8.8Z" fill="#A78BFA"/>
-        </svg>
-
-        <!-- HERO MASCOT -->
-        <div class="animate-float relative z-10" style="width:min(380px,88vw);">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 340" style="width:100%;height:auto;filter:drop-shadow(0 20px 40px rgba(120,53,15,.18));">
-            <defs>
-              <clipPath id="dc1">
-                <path d="M48,182 C22,150 8,78 120,8 C232,78 218,150 192,182 Z"/>
-              </clipPath>
-              <linearGradient id="cg1" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0%" stop-color="#F9FAFB"/>
-                <stop offset="50%" stop-color="#FFFFFF"/>
-                <stop offset="100%" stop-color="#F3F4F6"/>
-              </linearGradient>
-              <linearGradient id="shine1" x1="0.08" y1="0" x2=".6" y2="0">
-                <stop offset="0%" stop-color="white" stop-opacity=".38"/>
-                <stop offset="100%" stop-color="white" stop-opacity="0"/>
-              </linearGradient>
-              <radialGradient id="cheek1" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stop-color="#FCA5A5" stop-opacity=".75"/>
-                <stop offset="100%" stop-color="#FCA5A5" stop-opacity="0"/>
-              </radialGradient>
-            </defs>
-
-            <!-- ICE DOME LAYERS -->
-            <rect x="0"   y="6"   width="240" height="63" fill="#38BDF8" clip-path="url(#dc1)"/>
-            <rect x="0"   y="69"  width="240" height="55" fill="#FBBF24" clip-path="url(#dc1)"/>
-            <rect x="0"   y="124" width="240" height="60" fill="#FB923C" clip-path="url(#dc1)"/>
-            <!-- Dome shine overlay -->
-            <path d="M48,182 C22,150 8,78 120,8 C232,78 218,150 192,182 Z" fill="url(#shine1)"/>
-            <!-- Dome outline highlight -->
-            <path d="M48,182 C22,150 8,78 120,8 C232,78 218,150 192,182 Z" fill="none" stroke="white" stroke-width="2.5" opacity=".32"/>
-            <!-- Layer divider lines (subtle) -->
-            <path d="M 56,124 Q 120,130 184,124" fill="none" stroke="white" stroke-width="1" opacity=".25"/>
-            <path d="M 42,69  Q 120,77  198,69"  fill="none" stroke="white" stroke-width="1" opacity=".25"/>
-
-            <!-- Ice texture dots -->
-            <circle cx="82"  cy="150" r="3"   fill="white" opacity=".42"/>
-            <circle cx="158" cy="98"  r="2.5" fill="white" opacity=".38"/>
-            <circle cx="166" cy="142" r="2"   fill="white" opacity=".35"/>
-            <circle cx="96"  cy="87"  r="2.5" fill="white" opacity=".42"/>
-            <circle cx="123" cy="44"  r="2"   fill="white" opacity=".38"/>
-            <circle cx="153" cy="56"  r="1.5" fill="white" opacity=".48"/>
-            <circle cx="74"  cy="110" r="2"   fill="white" opacity=".36"/>
-            <circle cx="143" cy="122" r="1.5" fill="white" opacity=".38"/>
-            <circle cx="108" cy="30"  r="1.5" fill="white" opacity=".4"/>
-            <circle cx="136" cy="80"  r="2"   fill="white" opacity=".36"/>
-
-            <!-- Syrup drips -->
-            <ellipse cx="66"  cy="187" rx="4.5" ry="9.5" fill="#FB923C" opacity=".78"/>
-            <ellipse cx="174" cy="187" rx="4"   ry="8.5" fill="#FB923C" opacity=".68"/>
-            <ellipse cx="92"  cy="184" rx="3"   ry="6.5" fill="#FBBF24" opacity=".68"/>
-            <ellipse cx="149" cy="185" rx="3.5" ry="5.5" fill="#FBBF24" opacity=".58"/>
-
-            <!-- CUP BODY -->
-            <path d="M48,182 L82,272 L158,272 L192,182 Z" fill="url(#cg1)"/>
-            <!-- Cup light band near top -->
-            <path d="M55,196 L86,203 L154,203 L185,196 Z" fill="white" opacity=".36"/>
-            <!-- Subtle vertical seams -->
-            <line x1="97"  y1="182" x2="89"  y2="272" stroke="#DCDCDC" stroke-width=".9"/>
-            <line x1="120" y1="182" x2="120" y2="272" stroke="#DCDCDC" stroke-width=".9"/>
-            <line x1="143" y1="182" x2="151" y2="272" stroke="#DCDCDC" stroke-width=".9"/>
-            <!-- Cup top rim -->
-            <ellipse cx="120" cy="182" rx="72" ry="12" fill="#E8ECEF" stroke="#D8DCE0" stroke-width="1.5"/>
-            <!-- Cup bottom -->
-            <ellipse cx="120" cy="272" rx="38" ry="8" fill="#D8D8D8"/>
-
-            <!-- FACE -->
-            <circle cx="87"  cy="225" r="18" fill="url(#cheek1)"/>
-            <circle cx="153" cy="225" r="18" fill="url(#cheek1)"/>
-            <!-- Eyes -->
-            <circle cx="104" cy="217" r="7.5" fill="#2D1A0E"/>
-            <circle cx="136" cy="217" r="7.5" fill="#2D1A0E"/>
-            <!-- Eye shine -->
-            <circle cx="108" cy="214" r="2.8" fill="white"/>
-            <circle cx="140" cy="214" r="2.8" fill="white"/>
-            <circle cx="106" cy="218" r="1"   fill="white" opacity=".5"/>
-            <circle cx="138" cy="218" r="1"   fill="white" opacity=".5"/>
-            <!-- Smile -->
-            <path d="M104,235 Q120,252 136,235" fill="none" stroke="#2D1A0E" stroke-width="3.2" stroke-linecap="round"/>
-
-            <!-- STICK -->
-            <rect x="112" y="272" width="16" height="58" rx="5" fill="#92400E"/>
-            <rect x="114" y="274" width="4"  height="52" rx="2" fill="#B45309" opacity=".4"/>
-          </svg>
+      <!-- RIGHT — Logo large + floating -->
+      <div class="flex items-center justify-center z-10">
+        <div class="float relative">
+          <img src="assets/logo.jpg" alt="Kai Shave Ice" style="width:min(380px,80vw);border-radius:50%;border:5px solid var(--brown);box-shadow:8px 12px 0 var(--brown)" />
+          <!-- Decorative color splats around logo -->
+          <div class="absolute -top-4 -right-4 w-12 h-12 rounded-full opacity-70" style="background:var(--red)"></div>
+          <div class="absolute -bottom-2 -left-6 w-10 h-10 rounded-full opacity-70" style="background:var(--blue)"></div>
+          <div class="absolute top-1/2 -right-8 w-8 h-8 rounded-full opacity-70" style="background:var(--yellow)"></div>
         </div>
       </div>
+    </div>
+  </section>
 
+  <!-- ═══════════════════════════════════ MARQUEE ═══ -->
+  <div style="background:var(--brown);padding:12px 0;overflow:hidden">
+    <div class="mq gap-10">
+      <span class="font-bold uppercase tracking-[.2em] text-xs" style="color:var(--yellow)">HAND-SHAVED</span>
+      <span style="color:var(--yellow);opacity:.4">✦</span>
+      <span class="font-bold uppercase tracking-[.2em] text-xs" style="color:var(--yellow)">HOUSE SYRUPS</span>
+      <span style="color:var(--yellow);opacity:.4">✦</span>
+      <span class="font-bold uppercase tracking-[.2em] text-xs" style="color:var(--yellow)">MORRO BAY</span>
+      <span style="color:var(--yellow);opacity:.4">✦</span>
+      <span class="font-bold uppercase tracking-[.2em] text-xs" style="color:var(--yellow)">NORTH SHORE INSPIRED</span>
+      <span style="color:var(--yellow);opacity:.4">✦</span>
+      <span class="font-bold uppercase tracking-[.2em] text-xs" style="color:var(--yellow)">OPEN DAILY</span>
+      <span style="color:var(--yellow);opacity:.4">✦</span>
+      <span class="font-bold uppercase tracking-[.2em] text-xs" style="color:var(--yellow)">UNTIL SOLD OUT</span>
+      <span style="color:var(--yellow);opacity:.4">✦</span>
+      <!-- dupe -->
+      <span class="font-bold uppercase tracking-[.2em] text-xs" style="color:var(--yellow)">HAND-SHAVED</span>
+      <span style="color:var(--yellow);opacity:.4">✦</span>
+      <span class="font-bold uppercase tracking-[.2em] text-xs" style="color:var(--yellow)">HOUSE SYRUPS</span>
+      <span style="color:var(--yellow);opacity:.4">✦</span>
+      <span class="font-bold uppercase tracking-[.2em] text-xs" style="color:var(--yellow)">MORRO BAY</span>
+      <span style="color:var(--yellow);opacity:.4">✦</span>
+      <span class="font-bold uppercase tracking-[.2em] text-xs" style="color:var(--yellow)">NORTH SHORE INSPIRED</span>
+      <span style="color:var(--yellow);opacity:.4">✦</span>
+      <span class="font-bold uppercase tracking-[.2em] text-xs" style="color:var(--yellow)">OPEN DAILY</span>
+      <span style="color:var(--yellow);opacity:.4">✦</span>
+      <span class="font-bold uppercase tracking-[.2em] text-xs" style="color:var(--yellow)">UNTIL SOLD OUT</span>
+      <span style="color:var(--yellow);opacity:.4">✦</span>
     </div>
   </div>
-</section>
 
-
-<!-- =============================================
-     WAVE DIVIDER 1 — cream → ocean blue → white
-============================================= -->
-<div style="background:#FEF3C7;line-height:0;">
-  <svg viewBox="0 0 1440 110" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;height:90px;">
-    <path d="M0,45 C180,90 360,5 540,48 C720,90 900,5 1080,48 C1260,90 1360,22 1440,45 L1440,110 L0,110 Z" fill="#0EA5E9"/>
-    <path d="M0,70 C240,28 480,95 720,62 C960,28 1200,88 1440,60 L1440,110 L0,110 Z" fill="white"/>
-  </svg>
-</div>
-
-
-<!-- =============================================
-     FLAVORS SECTION
-============================================= -->
-<section id="flavors" class="bg-white py-24 lg:py-32">
-  <div class="max-w-7xl mx-auto px-6 lg:px-10">
-
-    <!-- Header -->
-    <div class="text-center mb-16 reveal">
-      <h2 class="font-pacifico text-brand mb-4" style="font-size:clamp(2.8rem,6vw,4.5rem);">The Menu</h2>
-      <p class="font-lato italic text-brand/50 text-lg">All syrups house-made. All ice hand-shaved. All the aloha.</p>
-    </div>
-
-    <!-- Flavor cards grid — 5 col desktop / 2 col mobile -->
-    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 lg:gap-5 mb-14">
-
-      <!-- Strawberry -->
-      <div class="flavor-card rounded-2xl bg-white border border-gray-100 shadow-sm p-5 text-center reveal rd1">
-        <div class="w-16 h-16 rounded-full mx-auto mb-4 shadow-sm" style="background:#F472B6;"></div>
-        <h3 class="font-inter font-bold text-brand text-sm mb-1.5">Strawberry</h3>
-        <p class="font-lato text-brand/45 text-xs">classic</p>
+  <!-- ══════════════════════════════════ FLAVORS ═══ -->
+  <section id="flavors" style="background:white;padding:6rem 1.5rem">
+    <div style="max-width:1200px;margin:0 auto">
+      <div class="text-center mb-16 reveal">
+        <h2 class="font-['Pacifico'] mb-3" style="font-size:clamp(2.5rem,6vw,5rem);color:var(--brown)">The Flavors</h2>
+        <p class="text-lg italic" style="color:var(--brown-mid);opacity:.6">All syrups house-made. All ice hand-shaved. All the aloha.</p>
       </div>
 
-      <!-- Mango -->
-      <div class="flavor-card rounded-2xl bg-white border border-gray-100 shadow-sm p-5 text-center reveal rd2">
-        <div class="w-16 h-16 rounded-full mx-auto mb-4 shadow-sm" style="background:#FB923C;"></div>
-        <h3 class="font-inter font-bold text-brand text-sm mb-1.5">Mango</h3>
-        <p class="font-lato text-brand/45 text-xs">tropical 🤙</p>
-      </div>
+      <!-- Flavor grid — asymmetric, not boring -->
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-12">
 
-      <!-- Blue Coconut -->
-      <div class="flavor-card rounded-2xl bg-white border border-gray-100 shadow-sm p-5 text-center reveal rd3">
-        <div class="w-16 h-16 rounded-full mx-auto mb-4 shadow-sm" style="background:#38BDF8;"></div>
-        <h3 class="font-inter font-bold text-brand text-sm mb-1.5">Blue Coconut</h3>
-        <p class="font-lato text-brand/45 text-xs">dreamy</p>
-      </div>
-
-      <!-- Lilikoi -->
-      <div class="flavor-card rounded-2xl bg-white border border-gray-100 shadow-sm p-5 text-center reveal rd4">
-        <div class="w-16 h-16 rounded-full mx-auto mb-4 shadow-sm" style="background:#FBBF24;"></div>
-        <h3 class="font-inter font-bold text-brand text-sm mb-1.5">Lilikoi</h3>
-        <p class="font-lato text-brand/45 text-xs">passion fruit</p>
-      </div>
-
-      <!-- Matcha -->
-      <div class="flavor-card rounded-2xl bg-white border border-gray-100 shadow-sm p-5 text-center reveal rd5">
-        <div class="w-16 h-16 rounded-full mx-auto mb-4 shadow-sm" style="background:#34D399;"></div>
-        <h3 class="font-inter font-bold text-brand text-sm mb-1.5">Matcha</h3>
-        <p class="font-lato text-brand/45 text-xs">earthy</p>
-      </div>
-
-      <!-- Watermelon -->
-      <div class="flavor-card rounded-2xl bg-white border border-gray-100 shadow-sm p-5 text-center reveal rd6">
-        <div class="w-16 h-16 rounded-full mx-auto mb-4 shadow-sm" style="background:#F87171;"></div>
-        <h3 class="font-inter font-bold text-brand text-sm mb-1.5">Watermelon</h3>
-        <p class="font-lato text-brand/45 text-xs">refreshing</p>
-      </div>
-
-      <!-- Tiger's Blood -->
-      <div class="flavor-card rounded-2xl bg-white border border-gray-100 shadow-sm p-5 text-center reveal rd7">
-        <div class="w-16 h-16 rounded-full mx-auto mb-4 shadow-sm overflow-hidden">
-          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" width="64" height="64">
-            <circle cx="32" cy="32" r="32" fill="#EF4444"/>
-            <path d="M32 4 Q56 16 50 32 Q42 48 32 42 Q22 36 28 22 Q36 10 52 24" fill="none" stroke="white" stroke-width="3.5" stroke-opacity=".72" stroke-linecap="round"/>
-            <path d="M16 14 Q8 28 16 42 Q24 56 40 50" fill="none" stroke="white" stroke-width="2.5" stroke-opacity=".5" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <h3 class="font-inter font-bold text-brand text-sm mb-1.5">Tiger's Blood</h3>
-        <p class="font-lato text-brand/45 text-xs">legendary</p>
-      </div>
-
-      <!-- Rainbow -->
-      <div class="flavor-card rounded-2xl bg-white border border-gray-100 shadow-sm p-5 text-center reveal rd8">
-        <div class="w-16 h-16 rounded-full mx-auto mb-4 shadow-sm" style="background:conic-gradient(#F472B6 0deg,#FB923C 60deg,#FBBF24 120deg,#34D399 180deg,#38BDF8 240deg,#A78BFA 300deg,#F472B6 360deg);"></div>
-        <h3 class="font-inter font-bold text-brand text-sm mb-1.5">Rainbow</h3>
-        <p class="font-lato text-brand/45 text-xs">go big</p>
-      </div>
-
-      <!-- Lemon -->
-      <div class="flavor-card rounded-2xl bg-white border border-gray-100 shadow-sm p-5 text-center reveal rd9">
-        <div class="w-16 h-16 rounded-full mx-auto mb-4 shadow-sm" style="background:#FDE047;"></div>
-        <h3 class="font-inter font-bold text-brand text-sm mb-1.5">Lemon</h3>
-        <p class="font-lato text-brand/45 text-xs">tart</p>
-      </div>
-
-      <!-- Grape -->
-      <div class="flavor-card rounded-2xl bg-white border border-gray-100 shadow-sm p-5 text-center reveal rd10">
-        <div class="w-16 h-16 rounded-full mx-auto mb-4 shadow-sm" style="background:#A78BFA;"></div>
-        <h3 class="font-inter font-bold text-brand text-sm mb-1.5">Grape</h3>
-        <p class="font-lato text-brand/45 text-xs">sweet</p>
-      </div>
-
-    </div>
-
-    <!-- Add-ons -->
-    <div class="text-center reveal">
-      <p class="font-inter font-black text-brand text-base uppercase tracking-widest mb-5">Make it yours</p>
-      <div class="flex flex-wrap justify-center gap-3">
-        <span class="px-5 py-2.5 rounded-full bg-cream text-brand font-inter font-bold text-sm border border-brand/20 cursor-default hover:bg-brand hover:text-cream transition-all duration-200">+ Cream</span>
-        <span class="px-5 py-2.5 rounded-full bg-cream text-brand font-inter font-bold text-sm border border-brand/20 cursor-default hover:bg-brand hover:text-cream transition-all duration-200">+ Mochi</span>
-        <span class="px-5 py-2.5 rounded-full bg-cream text-brand font-inter font-bold text-sm border border-brand/20 cursor-default hover:bg-brand hover:text-cream transition-all duration-200">+ Azuki Beans</span>
-        <span class="px-5 py-2.5 rounded-full bg-cream text-brand font-inter font-bold text-sm border border-brand/20 cursor-default hover:bg-brand hover:text-cream transition-all duration-200">+ Condensed Milk</span>
-        <span class="px-5 py-2.5 rounded-full bg-cream text-brand font-inter font-bold text-sm border border-brand/20 cursor-default hover:bg-brand hover:text-cream transition-all duration-200">+ Fresh Fruit</span>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-
-<!-- =============================================
-     WAVE DIVIDER 2 — white → coral → cream
-============================================= -->
-<div style="background:white;line-height:0;">
-  <svg viewBox="0 0 1440 110" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;height:90px;">
-    <path d="M0,40 C200,88 400,8 600,45 C800,82 1000,10 1200,50 C1320,72 1390,28 1440,40 L1440,110 L0,110 Z" fill="#FB923C"/>
-    <path d="M0,68 C280,22 560,95 840,55 C1040,28 1260,85 1440,65 L1440,110 L0,110 Z" fill="#FEF3C7"/>
-  </svg>
-</div>
-
-
-<!-- =============================================
-     STORY / ABOUT SECTION
-============================================= -->
-<section id="about" class="bg-cream py-24 lg:py-32 overflow-hidden">
-  <div class="max-w-7xl mx-auto px-6 lg:px-10">
-    <div class="flex flex-col lg:flex-row items-center gap-16 lg:gap-20">
-
-      <!-- LEFT — text -->
-      <div class="lg:w-1/2 reveal">
-        <!-- Stacked headline with editorial overlap -->
-        <div class="mb-8">
-          <h2 class="font-pacifico text-brand leading-none mb-0" style="font-size:clamp(2.4rem,5.5vw,3.8rem);">
-            Hawaiian roots.
-          </h2>
-          <h3 class="font-inter font-black text-ocean -mt-2" style="font-size:clamp(1.8rem,4vw,3rem);">
-            California soul.
-          </h3>
+        <div class="flavor-card reveal rounded-2xl p-5 text-center border-2" style="border-color:#F472B6;background:linear-gradient(135deg,#FFF0F7,white)">
+          <div class="w-14 h-14 rounded-full mx-auto mb-3" style="background:#F472B6;border:3px solid var(--brown)"></div>
+          <p class="font-bold text-sm" style="color:var(--brown)">Strawberry</p>
+          <p class="text-xs mt-0.5" style="color:var(--brown-mid);opacity:.5">classic</p>
         </div>
 
-        <p class="font-lato text-brand/60 text-lg leading-relaxed mb-12 max-w-lg">
-          Kai means ocean in Hawaiian. We bring North Shore shave ice culture to the Central Coast —
-          house-made syrups, hand-shaved ice, and a whole lot of aloha.
+        <div class="flavor-card reveal rounded-2xl p-5 text-center border-2" style="border-color:#FB923C;background:linear-gradient(135deg,#FFF4ED,white)">
+          <div class="w-14 h-14 rounded-full mx-auto mb-3" style="background:#FB923C;border:3px solid var(--brown)"></div>
+          <p class="font-bold text-sm" style="color:var(--brown)">Mango</p>
+          <p class="text-xs mt-0.5" style="color:var(--brown-mid);opacity:.5">tropical</p>
+        </div>
+
+        <div class="flavor-card reveal rounded-2xl p-5 text-center border-2" style="border-color:#38BDF8;background:linear-gradient(135deg,#EFF9FF,white)">
+          <div class="w-14 h-14 rounded-full mx-auto mb-3" style="background:#38BDF8;border:3px solid var(--brown)"></div>
+          <p class="font-bold text-sm" style="color:var(--brown)">Blue Coconut</p>
+          <p class="text-xs mt-0.5" style="color:var(--brown-mid);opacity:.5">dreamy</p>
+        </div>
+
+        <div class="flavor-card reveal rounded-2xl p-5 text-center border-2" style="border-color:var(--yellow);background:linear-gradient(135deg,#FFFAEB,white)">
+          <div class="w-14 h-14 rounded-full mx-auto mb-3" style="background:var(--yellow);border:3px solid var(--brown)"></div>
+          <p class="font-bold text-sm" style="color:var(--brown)">Lilikoi</p>
+          <p class="text-xs mt-0.5" style="color:var(--brown-mid);opacity:.5">passion fruit</p>
+        </div>
+
+        <div class="flavor-card reveal rounded-2xl p-5 text-center border-2" style="border-color:#34D399;background:linear-gradient(135deg,#EDFFF7,white)">
+          <div class="w-14 h-14 rounded-full mx-auto mb-3" style="background:#34D399;border:3px solid var(--brown)"></div>
+          <p class="font-bold text-sm" style="color:var(--brown)">Matcha</p>
+          <p class="text-xs mt-0.5" style="color:var(--brown-mid);opacity:.5">earthy</p>
+        </div>
+
+        <div class="flavor-card reveal rounded-2xl p-5 text-center border-2" style="border-color:#F87171;background:linear-gradient(135deg,#FFF0F0,white)">
+          <div class="w-14 h-14 rounded-full mx-auto mb-3" style="background:#F87171;border:3px solid var(--brown)"></div>
+          <p class="font-bold text-sm" style="color:var(--brown)">Watermelon</p>
+          <p class="text-xs mt-0.5" style="color:var(--brown-mid);opacity:.5">refreshing</p>
+        </div>
+
+        <!-- Tiger's Blood — featured -->
+        <div class="flavor-card reveal rounded-2xl p-5 text-center border-2 md:col-span-1 relative overflow-hidden" style="border-color:#EF4444;background:linear-gradient(135deg,#FEF0F0,white)">
+          <div class="absolute top-2 right-2 text-xs font-bold px-2 py-0.5 rounded-full" style="background:#EF4444;color:white">Legendary</div>
+          <div class="w-14 h-14 rounded-full mx-auto mb-3 overflow-hidden" style="border:3px solid var(--brown);background:linear-gradient(135deg,#EF4444 50%,white 50%)"></div>
+          <p class="font-bold text-sm" style="color:var(--brown)">Tiger's Blood</p>
+          <p class="text-xs mt-0.5" style="color:var(--brown-mid);opacity:.5">strawberry coconut</p>
+        </div>
+
+        <!-- Rainbow — spans 2 -->
+        <div class="flavor-card reveal rounded-2xl p-5 text-center border-2 md:col-span-2" style="border-color:var(--brown);background:white">
+          <div class="w-14 h-14 rounded-full mx-auto mb-3" style="border:3px solid var(--brown);background:conic-gradient(#F472B6,#FB923C,var(--yellow),#34D399,#38BDF8,#A78BFA,#F472B6)"></div>
+          <p class="font-bold text-sm" style="color:var(--brown)">Rainbow</p>
+          <p class="text-xs mt-0.5" style="color:var(--brown-mid);opacity:.5">go big or go home</p>
+        </div>
+
+        <div class="flavor-card reveal rounded-2xl p-5 text-center border-2" style="border-color:#FDE047;background:linear-gradient(135deg,#FEFCE8,white)">
+          <div class="w-14 h-14 rounded-full mx-auto mb-3" style="background:#FDE047;border:3px solid var(--brown)"></div>
+          <p class="font-bold text-sm" style="color:var(--brown)">Lemon</p>
+          <p class="text-xs mt-0.5" style="color:var(--brown-mid);opacity:.5">tart</p>
+        </div>
+
+        <div class="flavor-card reveal rounded-2xl p-5 text-center border-2" style="border-color:#A78BFA;background:linear-gradient(135deg,#F5F0FF,white)">
+          <div class="w-14 h-14 rounded-full mx-auto mb-3" style="background:#A78BFA;border:3px solid var(--brown)"></div>
+          <p class="font-bold text-sm" style="color:var(--brown)">Grape</p>
+          <p class="text-xs mt-0.5" style="color:var(--brown-mid);opacity:.5">sweet</p>
+        </div>
+
+      </div>
+
+      <!-- Add-ons -->
+      <div class="reveal text-center p-8 rounded-3xl border-2" style="border-color:var(--brown);border-style:dashed">
+        <p class="font-bold text-lg mb-4" style="color:var(--brown)">Make it yours</p>
+        <div class="flex flex-wrap gap-3 justify-center">
+          <span class="px-4 py-2 rounded-full font-bold text-sm border-2" style="border-color:var(--brown);color:var(--brown)">+ Cream</span>
+          <span class="px-4 py-2 rounded-full font-bold text-sm border-2" style="border-color:var(--brown);color:var(--brown)">+ Mochi</span>
+          <span class="px-4 py-2 rounded-full font-bold text-sm border-2" style="border-color:var(--brown);color:var(--brown)">+ Azuki Beans</span>
+          <span class="px-4 py-2 rounded-full font-bold text-sm border-2" style="border-color:var(--brown);color:var(--brown)">+ Condensed Milk</span>
+          <span class="px-4 py-2 rounded-full font-bold text-sm border-2" style="border-color:var(--brown);color:var(--brown)">+ Fresh Fruit</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Wave divider -->
+  <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block;background:white;margin-top:-1px">
+    <path d="M0 40 C240 80 480 0 720 40 C960 80 1200 0 1440 40 L1440 80 L0 80Z" fill="#F5F0E1"/>
+  </svg>
+
+  <!-- ═══════════════════════════════════════ STORY ═══ -->
+  <section id="story" style="background:var(--cream);padding:6rem 1.5rem">
+    <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center" class="reveal">
+
+      <div>
+        <h2 class="font-['Pacifico'] mb-0" style="font-size:clamp(2.5rem,5vw,4rem);color:var(--brown);line-height:.9">Hawaiian<br/>roots.</h2>
+        <p class="font-bold mb-8" style="font-size:clamp(1.8rem,4vw,3rem);color:var(--blue-deep);margin-top:.25rem">California soul.</p>
+        <p class="text-lg leading-relaxed mb-8" style="color:var(--brown-mid)">
+          Kai means ocean in Hawaiian. We bring North Shore shave ice culture to the Central Coast — house-made syrups, hand-shaved ice, and a whole lot of aloha. Right here in Morro Bay.
         </p>
-
-        <!-- Stat tiles -->
-        <div class="flex flex-wrap gap-4">
-          <div class="stat-tile bg-white rounded-2xl px-5 py-4 shadow-sm border border-brand/8 text-center min-w-[130px]">
-            <div class="text-2xl mb-1">🌊</div>
-            <p class="font-inter font-bold text-brand text-xs uppercase tracking-wide">Hand-shaved</p>
+        <div class="grid grid-cols-3 gap-4">
+          <div class="text-center p-4 rounded-2xl border-2" style="border-color:var(--brown)">
+            <p class="text-2xl mb-1">🌊</p>
+            <p class="font-bold text-xs uppercase tracking-wider" style="color:var(--brown)">Hand-shaved<br/>every time</p>
           </div>
-          <div class="stat-tile bg-white rounded-2xl px-5 py-4 shadow-sm border border-brand/8 text-center min-w-[130px]">
-            <div class="text-2xl mb-1">🤙</div>
-            <p class="font-inter font-bold text-brand text-xs uppercase tracking-wide">North Shore Inspired</p>
+          <div class="text-center p-4 rounded-2xl border-2" style="border-color:var(--brown)">
+            <p class="text-2xl mb-1">🤙</p>
+            <p class="font-bold text-xs uppercase tracking-wider" style="color:var(--brown)">North Shore<br/>inspired</p>
           </div>
-          <div class="stat-tile bg-white rounded-2xl px-5 py-4 shadow-sm border border-brand/8 text-center min-w-[130px]">
-            <div class="text-2xl mb-1">☀️</div>
-            <p class="font-inter font-bold text-brand text-xs uppercase tracking-wide">Morro Bay Made</p>
+          <div class="text-center p-4 rounded-2xl border-2" style="border-color:var(--brown)">
+            <p class="text-2xl mb-1">☀️</p>
+            <p class="font-bold text-xs uppercase tracking-wider" style="color:var(--brown)">Morro Bay<br/>made</p>
           </div>
         </div>
       </div>
 
-      <!-- RIGHT — tilted mascot + decorative circles -->
-      <div class="lg:w-1/2 flex justify-center items-center relative" style="min-height:380px;">
-        <!-- Decorative circles in background -->
-        <div class="absolute top-0 right-8 w-20 h-20 rounded-full opacity-40" style="background:#38BDF8;"></div>
-        <div class="absolute bottom-4 left-4 w-14 h-14 rounded-full opacity-35" style="background:#FB923C;"></div>
-        <div class="absolute top-16 left-12 w-10 h-10 rounded-full opacity-30" style="background:#FBBF24;"></div>
-        <div class="absolute bottom-20 right-2 w-8 h-8 rounded-full opacity-35" style="background:#F472B6;"></div>
-        <!-- Wave shape decoration -->
-        <svg class="absolute bottom-0 left-0 opacity-20" viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg" style="width:200px;">
-          <path d="M0 30 Q50 5 100 30 Q150 55 200 30" fill="none" stroke="#0EA5E9" stroke-width="4"/>
-          <path d="M0 45 Q50 20 100 45 Q150 70 200 45" fill="none" stroke="#0EA5E9" stroke-width="3"/>
-        </svg>
+      <!-- Logo large -->
+      <div class="flex items-center justify-center">
+        <div class="float relative">
+          <img src="assets/logo.jpg" alt="Kai Shave Ice" style="width:min(340px,75vw);border-radius:50%;border:5px solid var(--brown);box-shadow:-8px 10px 0 var(--brown);transform:rotate(3deg)" />
+          <!-- Color blobs -->
+          <div style="position:absolute;top:-16px;left:-16px;width:48px;height:48px;border-radius:50%;background:var(--red);opacity:.7"></div>
+          <div style="position:absolute;bottom:-8px;right:-20px;width:40px;height:40px;border-radius:50%;background:var(--blue);opacity:.7"></div>
+          <div style="position:absolute;bottom:30px;left:-24px;width:32px;height:32px;border-radius:50%;background:var(--yellow);opacity:.8"></div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        <!-- Story mascot (tilted, playful) -->
-        <div class="animate-float-tilt relative z-10 reveal rd2" style="width:min(340px,82vw);">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 340" style="width:100%;height:auto;filter:drop-shadow(0 18px 36px rgba(120,53,15,.16));">
-            <defs>
-              <clipPath id="dc2">
-                <path d="M48,182 C22,150 8,78 120,8 C232,78 218,150 192,182 Z"/>
-              </clipPath>
-              <linearGradient id="cg2" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0%" stop-color="#F9FAFB"/>
-                <stop offset="50%" stop-color="#FFFFFF"/>
-                <stop offset="100%" stop-color="#F3F4F6"/>
-              </linearGradient>
-              <linearGradient id="shine2" x1="0.08" y1="0" x2=".6" y2="0">
-                <stop offset="0%" stop-color="white" stop-opacity=".38"/>
-                <stop offset="100%" stop-color="white" stop-opacity="0"/>
-              </linearGradient>
-              <radialGradient id="cheek2" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stop-color="#FCA5A5" stop-opacity=".75"/>
-                <stop offset="100%" stop-color="#FCA5A5" stop-opacity="0"/>
-              </radialGradient>
-            </defs>
-            <!-- Sky blue top -->
-            <rect x="0" y="6"   width="240" height="63" fill="#38BDF8" clip-path="url(#dc2)"/>
-            <!-- Yellow middle — slightly wider for playful look -->
-            <rect x="0" y="69"  width="240" height="55" fill="#F472B6" clip-path="url(#dc2)"/>
-            <!-- Coral bottom — lime green for fun variant -->
-            <rect x="0" y="124" width="240" height="60" fill="#34D399" clip-path="url(#dc2)"/>
-            <path d="M48,182 C22,150 8,78 120,8 C232,78 218,150 192,182 Z" fill="url(#shine2)"/>
-            <path d="M48,182 C22,150 8,78 120,8 C232,78 218,150 192,182 Z" fill="none" stroke="white" stroke-width="2.5" opacity=".3"/>
-            <path d="M 56,124 Q 120,130 184,124" fill="none" stroke="white" stroke-width="1" opacity=".22"/>
-            <path d="M 42,69  Q 120,77  198,69"  fill="none" stroke="white" stroke-width="1" opacity=".22"/>
-            <!-- Texture dots -->
-            <circle cx="82"  cy="150" r="3"   fill="white" opacity=".4"/>
-            <circle cx="158" cy="98"  r="2.5" fill="white" opacity=".36"/>
-            <circle cx="96"  cy="87"  r="2.5" fill="white" opacity=".4"/>
-            <circle cx="123" cy="44"  r="2"   fill="white" opacity=".36"/>
-            <circle cx="153" cy="56"  r="1.5" fill="white" opacity=".45"/>
-            <circle cx="74"  cy="110" r="2"   fill="white" opacity=".34"/>
-            <circle cx="109" cy="30"  r="1.5" fill="white" opacity=".38"/>
-            <!-- Drips -->
-            <ellipse cx="66"  cy="187" rx="4.5" ry="9.5" fill="#34D399" opacity=".75"/>
-            <ellipse cx="174" cy="187" rx="4"   ry="8.5" fill="#34D399" opacity=".65"/>
-            <ellipse cx="92"  cy="184" rx="3"   ry="6.5" fill="#F472B6" opacity=".65"/>
-            <ellipse cx="149" cy="185" rx="3.5" ry="5.5" fill="#F472B6" opacity=".55"/>
-            <!-- Cup -->
-            <path d="M48,182 L82,272 L158,272 L192,182 Z" fill="url(#cg2)"/>
-            <path d="M55,196 L86,203 L154,203 L185,196 Z" fill="white" opacity=".35"/>
-            <line x1="97"  y1="182" x2="89"  y2="272" stroke="#DCDCDC" stroke-width=".9"/>
-            <line x1="120" y1="182" x2="120" y2="272" stroke="#DCDCDC" stroke-width=".9"/>
-            <line x1="143" y1="182" x2="151" y2="272" stroke="#DCDCDC" stroke-width=".9"/>
-            <ellipse cx="120" cy="182" rx="72" ry="12" fill="#E8ECEF" stroke="#D8DCE0" stroke-width="1.5"/>
-            <ellipse cx="120" cy="272" rx="38" ry="8" fill="#D8D8D8"/>
-            <!-- Face — playful winking expression -->
-            <circle cx="87"  cy="225" r="18" fill="url(#cheek2)"/>
-            <circle cx="153" cy="225" r="18" fill="url(#cheek2)"/>
-            <!-- Normal eye left -->
-            <circle cx="104" cy="217" r="7.5" fill="#2D1A0E"/>
-            <circle cx="108" cy="214" r="2.8" fill="white"/>
-            <!-- Wink right eye (arc) -->
-            <path d="M129,217 Q136,210 143,217" fill="none" stroke="#2D1A0E" stroke-width="3.5" stroke-linecap="round"/>
-            <!-- Bigger smile -->
-            <path d="M102,234 Q120,254 138,234" fill="none" stroke="#2D1A0E" stroke-width="3.5" stroke-linecap="round"/>
-            <!-- Stick -->
-            <rect x="112" y="272" width="16" height="58" rx="5" fill="#92400E"/>
-            <rect x="114" y="274" width="4"  height="52" rx="2" fill="#B45309" opacity=".4"/>
-          </svg>
+  <!-- ══════════════════════════════════ INSTAGRAM ═══ -->
+  <section style="background:white;padding:5rem 1.5rem">
+    <div style="max-width:1000px;margin:0 auto">
+      <div class="text-center mb-10 reveal">
+        <a href="https://instagram.com/kaishaveicemb" target="_blank" class="inline-flex items-center gap-2 cursor-pointer hover:opacity-70 transition-opacity">
+          <svg class="w-6 h-6" fill="currentColor" style="color:var(--brown)" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          <h2 class="font-['Pacifico'] text-4xl" style="color:var(--brown)">@kaishaveicemb</h2>
+        </a>
+        <p class="mt-1 text-sm" style="color:var(--brown-mid);opacity:.5">Follow for flavor drops & daily specials</p>
+      </div>
+
+      <div class="grid grid-cols-3 gap-3 reveal">
+        <!-- Mango -->
+        <div class="ig-cell aspect-square rounded-2xl flex items-center justify-center" style="background:linear-gradient(135deg,#FB923C,#FBBF24)">
+          <p class="font-['Pacifico'] text-white text-2xl text-center drop-shadow px-4">Mango<br/>Season</p>
+        </div>
+        <!-- Blue Coconut -->
+        <div class="ig-cell aspect-square rounded-2xl flex items-center justify-center" style="background:linear-gradient(135deg,#38BDF8,#0EA5E9)">
+          <p class="font-['Pacifico'] text-white text-2xl text-center drop-shadow px-4">Blue<br/>Coconut</p>
+        </div>
+        <!-- Follow CTA -->
+        <div class="ig-cell aspect-square rounded-2xl flex flex-col items-center justify-center gap-3" style="background:var(--brown)">
+          <p class="font-['Pacifico'] text-xl text-center px-4" style="color:var(--yellow)">Follow for today's special</p>
+          <a href="https://instagram.com/kaishaveicemb" target="_blank" class="btn text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full" style="background:var(--yellow);color:var(--brown)">@kaishaveicemb →</a>
+        </div>
+        <!-- Tiger's Blood -->
+        <div class="ig-cell aspect-square rounded-2xl flex items-center justify-center" style="background:linear-gradient(135deg,#EF4444,#F472B6)">
+          <p class="font-['Pacifico'] text-white text-2xl text-center drop-shadow px-4">Tiger's<br/>Blood</p>
+        </div>
+        <!-- Logo center -->
+        <div class="ig-cell aspect-square rounded-2xl flex items-center justify-center" style="background:var(--cream)">
+          <img src="assets/logo.jpg" alt="Kai Shave Ice" style="width:75%;border-radius:50%;border:3px solid var(--brown)" />
+        </div>
+        <!-- Matcha -->
+        <div class="ig-cell aspect-square rounded-2xl flex items-center justify-center" style="background:linear-gradient(135deg,#34D399,#059669)">
+          <p class="font-['Pacifico'] text-white text-2xl text-center drop-shadow px-4">Matcha<br/>Days</p>
         </div>
       </div>
 
-    </div>
-  </div>
-</section>
-
-
-<!-- =============================================
-     INSTAGRAM SECTION
-============================================= -->
-<section id="instagram" class="bg-white py-24 lg:py-32">
-  <div class="max-w-5xl mx-auto px-6 lg:px-10">
-
-    <!-- Header -->
-    <div class="text-center mb-12 reveal">
-      <div class="flex items-center justify-center gap-3 mb-4">
-        <!-- Instagram icon -->
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="36" height="36">
-          <defs>
-            <linearGradient id="igGrad" x1="0%" y1="100%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#f58529"/>
-              <stop offset="50%" stop-color="#dd2a7b"/>
-              <stop offset="100%" stop-color="#515bd4"/>
-            </linearGradient>
-          </defs>
-          <rect width="24" height="24" rx="6" fill="url(#igGrad)"/>
-          <circle cx="12" cy="12" r="4" fill="none" stroke="white" stroke-width="1.8"/>
-          <circle cx="17.5" cy="6.5" r="1.2" fill="white"/>
-          <rect x="2.5" y="2.5" width="19" height="19" rx="5" fill="none" stroke="white" stroke-width="1.8"/>
-        </svg>
-        <h2 class="font-pacifico text-brand" style="font-size:clamp(2.2rem,5vw,3.5rem);">@kaishaveicemb</h2>
+      <div class="text-center mt-8 reveal">
+        <a href="https://instagram.com/kaishaveicemb" target="_blank" class="btn inline-block font-bold uppercase tracking-widest text-sm px-8 py-3.5 rounded-full" style="background:var(--brown);color:var(--cream)">
+          Follow on Instagram
+        </a>
       </div>
-      <p class="font-lato text-brand/50 text-lg">Follow for daily specials &amp; flavor drops</p>
     </div>
+  </section>
 
-    <!-- Instagram grid 3×2 -->
-    <div class="grid grid-cols-3 gap-3 sm:gap-4 mb-10 reveal">
-
-      <!-- Cell 1: Mango Season -->
-      <a href="https://instagram.com/kaishaveicemb" target="_blank"
-         class="ig-cell block relative rounded-xl overflow-hidden"
-         style="aspect-ratio:1;background:linear-gradient(135deg,#FB923C 0%,#F97316 100%);">
-        <div class="absolute inset-0 flex items-center justify-center p-4">
-          <span class="font-pacifico text-white text-center leading-tight drop-shadow-md"
-                style="font-size:clamp(1.1rem,3vw,2rem);">Mango Season</span>
+  <!-- ══════════════════════════════════ FIND US ═══ -->
+  <section id="find" style="background:var(--blue-deep);padding:6rem 1.5rem">
+    <div style="max-width:900px;margin:0 auto;text-align:center">
+      <h2 class="font-['Pacifico'] text-white mb-12 reveal" style="font-size:clamp(2.5rem,7vw,6rem)">Come find us.</h2>
+      <div class="grid md:grid-cols-2 gap-6 reveal">
+        <div class="rounded-3xl p-8 text-center" style="background:white">
+          <svg class="w-8 h-8 mx-auto mb-4" fill="none" stroke="currentColor" style="color:var(--blue-deep)" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>
+          <p class="font-['Pacifico'] text-2xl mb-2" style="color:var(--brown)">Location</p>
+          <p class="font-bold mb-1" style="color:var(--brown-mid)">Morro Bay, CA</p>
+          <p class="text-sm mb-4" style="color:var(--brown-mid);opacity:.5">Central Coast, California</p>
+          <a href="https://maps.google.com/?q=Kai+Shave+Ice+Morro+Bay+CA" target="_blank" class="btn inline-block font-bold text-sm uppercase tracking-wider px-5 py-2.5 rounded-full" style="background:var(--blue-deep);color:white">
+            Get Directions →
+          </a>
         </div>
-        <div class="absolute inset-0 opacity-10" style="background:radial-gradient(circle at 30% 30%,white,transparent 60%);"></div>
-      </a>
-
-      <!-- Cell 2: Blue Coconut -->
-      <a href="https://instagram.com/kaishaveicemb" target="_blank"
-         class="ig-cell block relative rounded-xl overflow-hidden"
-         style="aspect-ratio:1;background:linear-gradient(135deg,#38BDF8 0%,#0EA5E9 100%);">
-        <div class="absolute inset-0 flex items-center justify-center p-4">
-          <span class="font-pacifico text-white text-center leading-tight drop-shadow-md"
-                style="font-size:clamp(1.1rem,3vw,2rem);">Blue Coconut</span>
-        </div>
-        <div class="absolute inset-0 opacity-10" style="background:radial-gradient(circle at 70% 30%,white,transparent 60%);"></div>
-      </a>
-
-      <!-- Cell 3: Follow CTA -->
-      <a href="https://instagram.com/kaishaveicemb" target="_blank"
-         class="ig-cell block relative rounded-xl overflow-hidden bg-ocean"
-         style="aspect-ratio:1;">
-        <div class="absolute inset-0 flex flex-col items-center justify-center gap-3 p-5">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32">
-            <rect width="24" height="24" rx="6" fill="rgba(255,255,255,0.2)"/>
-            <circle cx="12" cy="12" r="4" fill="none" stroke="white" stroke-width="1.8"/>
-            <circle cx="17.5" cy="6.5" r="1.2" fill="white"/>
-            <rect x="2.5" y="2.5" width="19" height="19" rx="5" fill="none" stroke="white" stroke-width="1.8"/>
-          </svg>
-          <p class="font-inter font-bold text-white text-center leading-snug"
-             style="font-size:clamp(.7rem,1.8vw,1rem);">Follow for today's special →</p>
-        </div>
-      </a>
-
-      <!-- Cell 4: Tiger's Blood -->
-      <a href="https://instagram.com/kaishaveicemb" target="_blank"
-         class="ig-cell block relative rounded-xl overflow-hidden"
-         style="aspect-ratio:1;background:linear-gradient(135deg,#EF4444 0%,#B91C1C 100%);">
-        <div class="absolute inset-0 flex items-center justify-center p-4">
-          <span class="font-pacifico text-white text-center leading-tight drop-shadow-md"
-                style="font-size:clamp(1.1rem,3vw,2rem);">Tiger's Blood</span>
-        </div>
-        <div class="absolute inset-0 opacity-10" style="background:radial-gradient(circle at 30% 70%,white,transparent 60%);"></div>
-      </a>
-
-      <!-- Cell 5: Mascot -->
-      <a href="https://instagram.com/kaishaveicemb" target="_blank"
-         class="ig-cell block relative rounded-xl overflow-hidden bg-cream"
-         style="aspect-ratio:1;">
-        <div class="absolute inset-0 flex items-center justify-center p-4">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 340" style="height:90%;width:auto;max-height:180px;">
-            <defs>
-              <clipPath id="dc3">
-                <path d="M48,182 C22,150 8,78 120,8 C232,78 218,150 192,182 Z"/>
-              </clipPath>
-              <linearGradient id="cg3" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0%" stop-color="#F9FAFB"/>
-                <stop offset="50%" stop-color="#FFFFFF"/>
-                <stop offset="100%" stop-color="#F3F4F6"/>
-              </linearGradient>
-              <radialGradient id="cheek3" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stop-color="#FCA5A5" stop-opacity=".75"/>
-                <stop offset="100%" stop-color="#FCA5A5" stop-opacity="0"/>
-              </radialGradient>
-            </defs>
-            <rect x="0" y="6"   width="240" height="63" fill="#38BDF8" clip-path="url(#dc3)"/>
-            <rect x="0" y="69"  width="240" height="55" fill="#FBBF24" clip-path="url(#dc3)"/>
-            <rect x="0" y="124" width="240" height="60" fill="#FB923C" clip-path="url(#dc3)"/>
-            <path d="M48,182 C22,150 8,78 120,8 C232,78 218,150 192,182 Z" fill="none" stroke="white" stroke-width="2" opacity=".28"/>
-            <ellipse cx="66"  cy="187" rx="4" ry="8"   fill="#FB923C" opacity=".7"/>
-            <ellipse cx="174" cy="187" rx="3.5" ry="7" fill="#FB923C" opacity=".6"/>
-            <path d="M48,182 L82,272 L158,272 L192,182 Z" fill="url(#cg3)"/>
-            <ellipse cx="120" cy="182" rx="72" ry="12" fill="#E8ECEF" stroke="#D8DCE0" stroke-width="1.5"/>
-            <ellipse cx="120" cy="272" rx="38" ry="8" fill="#D8D8D8"/>
-            <circle cx="87"  cy="225" r="18" fill="url(#cheek3)"/>
-            <circle cx="153" cy="225" r="18" fill="url(#cheek3)"/>
-            <circle cx="104" cy="217" r="7.5" fill="#2D1A0E"/>
-            <circle cx="136" cy="217" r="7.5" fill="#2D1A0E"/>
-            <circle cx="108" cy="214" r="2.8" fill="white"/>
-            <circle cx="140" cy="214" r="2.8" fill="white"/>
-            <path d="M104,235 Q120,252 136,235" fill="none" stroke="#2D1A0E" stroke-width="3.2" stroke-linecap="round"/>
-            <rect x="112" y="272" width="16" height="58" rx="5" fill="#92400E"/>
-          </svg>
-        </div>
-      </a>
-
-      <!-- Cell 6: Matcha Days -->
-      <a href="https://instagram.com/kaishaveicemb" target="_blank"
-         class="ig-cell block relative rounded-xl overflow-hidden"
-         style="aspect-ratio:1;background:linear-gradient(135deg,#34D399 0%,#0D9488 100%);">
-        <div class="absolute inset-0 flex items-center justify-center p-4">
-          <span class="font-pacifico text-white text-center leading-tight drop-shadow-md"
-                style="font-size:clamp(1.1rem,3vw,2rem);">Matcha Days</span>
-        </div>
-        <div class="absolute inset-0 opacity-10" style="background:radial-gradient(circle at 70% 70%,white,transparent 60%);"></div>
-      </a>
-
-    </div>
-
-    <!-- Follow CTA -->
-    <div class="text-center reveal">
-      <a href="https://instagram.com/kaishaveicemb" target="_blank"
-         class="btn-ig inline-flex items-center gap-2.5 px-9 py-4 rounded-full font-inter font-bold text-sm tracking-wide">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20">
-          <rect width="24" height="24" rx="6" fill="rgba(255,255,255,0.2)"/>
-          <circle cx="12" cy="12" r="4" fill="none" stroke="white" stroke-width="1.8"/>
-          <circle cx="17.5" cy="6.5" r="1.2" fill="white"/>
-          <rect x="2.5" y="2.5" width="19" height="19" rx="5" fill="none" stroke="white" stroke-width="1.8"/>
-        </svg>
-        Follow on Instagram
-      </a>
-    </div>
-
-  </div>
-</section>
-
-
-<!-- =============================================
-     FIND US SECTION
-============================================= -->
-<section id="find-us" class="bg-ocean py-24 lg:py-32 relative overflow-hidden">
-  <!-- Subtle wave decoration -->
-  <div class="absolute bottom-0 left-0 right-0 opacity-10">
-    <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;height:60px;">
-      <path d="M0,40 C360,0 720,80 1080,40 C1260,20 1380,55 1440,40 L1440,80 L0,80 Z" fill="white"/>
-    </svg>
-  </div>
-
-  <div class="max-w-5xl mx-auto px-6 lg:px-10 text-center relative z-10">
-
-    <h2 class="font-pacifico text-white mb-16 reveal"
-        style="font-size:clamp(3rem,8vw,5.5rem);">
-      Come find us.
-    </h2>
-
-    <div class="grid md:grid-cols-2 gap-6 mb-12">
-
-      <!-- Location card -->
-      <div class="find-card bg-white rounded-2xl p-8 text-left reveal rd1">
-        <div class="flex items-start gap-5">
-          <div class="w-14 h-14 rounded-full flex items-center justify-center flex-shrink-0" style="background:rgba(14,165,233,.12);">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#0EA5E9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-              <circle cx="12" cy="10" r="3"/>
-            </svg>
-          </div>
-          <div>
-            <h3 class="font-inter font-black text-brand text-xl mb-1.5">Morro Bay, CA</h3>
-            <p class="font-lato text-brand/60 text-base mb-5 leading-relaxed">Right on the waterfront.<br>You can't miss us. 🌊</p>
-            <a href="https://maps.google.com/?q=Kai+Shave+Ice+Morro+Bay+CA" target="_blank"
-               class="font-inter font-bold text-ocean text-sm hover:underline cursor-pointer inline-flex items-center gap-1.5">
-              Get Directions →
-            </a>
-          </div>
+        <div class="rounded-3xl p-8 text-center" style="background:white">
+          <svg class="w-8 h-8 mx-auto mb-4" fill="none" stroke="currentColor" style="color:var(--blue-deep)" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          <p class="font-['Pacifico'] text-2xl mb-2" style="color:var(--brown)">Hours</p>
+          <p class="font-bold text-lg mb-1" style="color:var(--brown)">Open Daily</p>
+          <p class="mb-2" style="color:var(--brown-mid)">11am – Sunset</p>
+          <p class="text-sm italic font-bold" style="color:var(--yellow);background:var(--brown);display:inline-block;padding:.25rem 1rem;border-radius:999px">We sell out fast. Come early.</p>
         </div>
       </div>
+    </div>
+  </section>
 
-      <!-- Hours card -->
-      <div class="find-card bg-white rounded-2xl p-8 text-left reveal rd2">
-        <div class="flex items-start gap-5">
-          <div class="w-14 h-14 rounded-full flex items-center justify-center flex-shrink-0" style="background:rgba(251,191,36,.15);">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#F59E0B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="10"/>
-              <polyline points="12 6 12 12 16 14"/>
-            </svg>
-          </div>
-          <div>
-            <h3 class="font-inter font-black text-brand text-xl mb-1.5">Open Daily</h3>
-            <p class="font-lato text-brand font-bold text-base mb-1">11am – Sunset</p>
-            <p class="font-lato text-brand/50 text-sm mb-4">(or until sold out)</p>
-            <p class="font-lato text-brand/60 text-sm">Every day of the week · Weather permitting</p>
-          </div>
+  <!-- ═══════════════════════════════════ FOOTER ═══ -->
+  <footer style="background:#451A03;padding:2.5rem 1.5rem">
+    <div style="max-width:1100px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1.5rem">
+      <div class="flex items-center gap-3">
+        <img src="assets/logo.jpg" alt="Kai Shave Ice" style="width:44px;height:44px;border-radius:50%;border:2px solid var(--yellow)" />
+        <div>
+          <p class="font-['Pacifico']" style="color:var(--cream);font-size:1.1rem">Kai Shave Ice</p>
+          <p style="color:var(--cream);opacity:.4;font-size:.75rem">Morro Bay, CA · Made with aloha 🤙</p>
         </div>
       </div>
-
+      <div class="flex gap-6 text-xs font-bold uppercase tracking-widest" style="color:var(--cream);opacity:.4">
+        <a href="#flavors" class="hover:opacity-100 transition-opacity cursor-pointer">Flavors</a>
+        <a href="#story" class="hover:opacity-100 transition-opacity cursor-pointer">About</a>
+        <a href="#find" class="hover:opacity-100 transition-opacity cursor-pointer">Find Us</a>
+        <a href="https://instagram.com/kaishaveicemb" target="_blank" class="hover:opacity-100 transition-opacity cursor-pointer">Instagram</a>
+      </div>
+      <p style="color:var(--cream);opacity:.2;font-size:.75rem">© 2026 Kai Shave Ice</p>
     </div>
+  </footer>
 
-    <!-- Urgency note -->
-    <p class="font-lato italic text-sunshine font-bold text-xl reveal" style="text-shadow:0 2px 8px rgba(0,0,0,.2);">
-      We sell out fast. Come early. 🤙
-    </p>
-
-  </div>
-</section>
-
-
-<!-- =============================================
-     FOOTER
-============================================= -->
-<footer style="background:#451A03;" class="py-14">
-  <div class="max-w-5xl mx-auto px-6 lg:px-10 text-center">
-
-    <!-- Mini mascot -->
-    <div class="flex justify-center mb-6">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 340" style="width:56px;height:auto;">
-        <defs>
-          <clipPath id="dc4">
-            <path d="M48,182 C22,150 8,78 120,8 C232,78 218,150 192,182 Z"/>
-          </clipPath>
-          <linearGradient id="cg4" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stop-color="#F9FAFB"/>
-            <stop offset="50%" stop-color="#FFFFFF"/>
-            <stop offset="100%" stop-color="#F3F4F6"/>
-          </linearGradient>
-        </defs>
-        <rect x="0" y="6"   width="240" height="63" fill="#38BDF8" clip-path="url(#dc4)"/>
-        <rect x="0" y="69"  width="240" height="55" fill="#FBBF24" clip-path="url(#dc4)"/>
-        <rect x="0" y="124" width="240" height="60" fill="#FB923C" clip-path="url(#dc4)"/>
-        <path d="M48,182 L82,272 L158,272 L192,182 Z" fill="url(#cg4)"/>
-        <ellipse cx="120" cy="182" rx="72" ry="12" fill="#E8ECEF"/>
-        <ellipse cx="120" cy="272" rx="38" ry="8" fill="#D8D8D8"/>
-        <circle cx="104" cy="217" r="7.5" fill="#2D1A0E"/>
-        <circle cx="136" cy="217" r="7.5" fill="#2D1A0E"/>
-        <circle cx="108" cy="214" r="2.8" fill="white"/>
-        <circle cx="140" cy="214" r="2.8" fill="white"/>
-        <path d="M104,235 Q120,252 136,235" fill="none" stroke="#2D1A0E" stroke-width="3" stroke-linecap="round"/>
-        <rect x="112" y="272" width="16" height="58" rx="5" fill="#92400E"/>
-      </svg>
-    </div>
-
-    <h3 class="font-pacifico text-cream text-3xl mb-2">Kai Shave Ice</h3>
-    <p class="font-lato text-cream/60 text-sm mb-8">Morro Bay, California · Made with aloha</p>
-
-    <!-- Nav links -->
-    <div class="flex flex-wrap items-center justify-center gap-6 mb-8">
-      <a href="#flavors"  class="font-inter font-bold text-cream/60 text-xs uppercase tracking-widest hover:text-cream transition-colors duration-200 cursor-pointer">Flavors</a>
-      <span class="text-cream/25">·</span>
-      <a href="#about"    class="font-inter font-bold text-cream/60 text-xs uppercase tracking-widest hover:text-cream transition-colors duration-200 cursor-pointer">About</a>
-      <span class="text-cream/25">·</span>
-      <a href="#find-us"  class="font-inter font-bold text-cream/60 text-xs uppercase tracking-widest hover:text-cream transition-colors duration-200 cursor-pointer">Find Us</a>
-      <span class="text-cream/25">·</span>
-      <a href="https://instagram.com/kaishaveicemb" target="_blank"
-         class="font-inter font-bold text-cream/60 text-xs uppercase tracking-widest hover:text-cream transition-colors duration-200 cursor-pointer">@kaishaveicemb</a>
-    </div>
-
-    <p class="font-lato text-cream/35 text-xs">© 2026 Kai Shave Ice. All rights reserved.</p>
-  </div>
-</footer>
-
-
-<!-- =============================================
-     JAVASCRIPT — scroll reveal + IntersectionObserver
-============================================= -->
-<script>
-  (function () {
-    // ── Scroll Reveal ──────────────────────────────
-    const revealEls = document.querySelectorAll('.reveal');
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          // Once revealed, unobserve to save resources
-          observer.unobserve(entry.target);
+  <script>
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('on'), i * 90);
+          obs.unobserve(e.target);
         }
       });
-    }, {
-      threshold: 0.12,
-      rootMargin: '0px 0px -40px 0px'
-    });
-
-    revealEls.forEach(el => observer.observe(el));
-
-    // ── Also reveal hero immediately ───────────────
-    const heroReveal = document.querySelector('#home .reveal');
-    if (heroReveal) {
-      setTimeout(() => heroReveal.classList.add('visible'), 80);
-    }
-
-    // ── Smooth anchor scroll (fallback) ────────────
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          e.preventDefault();
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      });
-    });
-
-    // ── Nav active highlight on scroll ─────────────
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.nav-link');
-
-    const sectionObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const id = entry.target.id;
-          navLinks.forEach(link => {
-            link.style.color = link.getAttribute('href') === '#' + id
-              ? '#0EA5E9'
-              : '';
-          });
-        }
-      });
-    }, { threshold: 0.4 });
-
-    sections.forEach(s => sectionObserver.observe(s));
-  })();
-</script>
-
+    }, { threshold: 0.08, rootMargin: '0px 0px -20px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  </script>
 </body>
 </html>

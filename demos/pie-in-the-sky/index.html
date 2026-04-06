@@ -101,38 +101,42 @@
     <div class="absolute inset-0 z-0">
       <img src="assets/bg-blue.webp" alt="" class="w-full h-full object-cover opacity-20" loading="lazy" />
     </div>
-    <div class="relative z-10 max-w-3xl mx-auto">
-      <!-- Logo — once only -->
-      <img src="assets/design7.png" style="height:150px" class="mx-auto mb-6 drop-shadow-2xl" alt="Pie in the Sky Pizza" loading="lazy" />
-      <img src="assets/stars.png" style="height:40px" class="mx-auto mb-6 opacity-80" alt="" loading="lazy" />
-      <h1 class="font-display text-white leading-tight mb-4" style="font-size:clamp(2.5rem,7vw,5rem)">
-        Sourdough Pizza<br/>by the Pier
-      </h1>
-      <p class="font-serif italic text-2xl mb-4" style="color:#F0D06B">naturally fermented by the beach</p>
-      <p class="font-serif text-white/70 text-lg mb-10 max-w-xl mx-auto leading-relaxed">
-        Walk-up pizza kiosk overlooking the Cayucos Pier. Fresh sourdough crust, local toppings, ocean breeze.
-      </p>
-      <div class="flex flex-wrap gap-4 justify-center mb-10">
-        <a href="#visit" class="bg-gold text-navy font-bold text-sm uppercase tracking-wider px-8 py-3.5 rounded-full hover:bg-gold-dark transition-colors cursor-pointer shadow-lg hover:scale-105 active:scale-95 transition-all">
-          Order Pickup
-        </a>
-        <a href="#menu" class="wipe-ghost border-2 border-white/50 text-white font-bold text-sm uppercase tracking-wider px-8 py-3.5 rounded-full cursor-pointer">
-          <span>View Menu</span>
-        </a>
+    <div class="relative z-10 w-full max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+      <!-- LEFT: text only, no logo -->
+      <div>
+        <p class="font-sans text-xs uppercase tracking-[.25em] mb-5" style="color:#F0D06B">Cayucos, California</p>
+        <h1 class="font-display text-white leading-[.92] mb-5" style="font-size:clamp(3rem,7vw,5.5rem)">
+          Sourdough<br/>Pizza by<br/>the Pier
+        </h1>
+        <p class="font-serif italic text-xl mb-5" style="color:#F0D06B">naturally fermented by the beach</p>
+        <p class="font-serif text-white/70 text-base leading-relaxed mb-8 max-w-sm">
+          Walk-up kiosk overlooking the Cayucos Pier. Fresh sourdough crust, local toppings, ocean breeze.
+        </p>
+        <div class="flex flex-wrap gap-3 mb-8">
+          <a href="#visit" class="bg-gold text-navy font-bold text-sm uppercase tracking-wider px-7 py-3.5 rounded-full hover:bg-gold-dark transition-colors cursor-pointer shadow-md">
+            Order Pickup
+          </a>
+          <a href="#menu" class="wipe-ghost border-2 border-white/50 text-white font-bold text-sm uppercase tracking-wider px-7 py-3.5 rounded-full cursor-pointer">
+            <span>View Menu</span>
+          </a>
+        </div>
+        <div class="inline-flex items-center gap-2.5 bg-white/10 border border-white/20 rounded-full px-4 py-2.5 backdrop-blur-sm">
+          <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse flex-shrink-0"></span>
+          <span class="font-sans text-white/80 text-sm">Fri–Mon &nbsp;·&nbsp; Noon–7PM &nbsp;·&nbsp; until sold out</span>
+        </div>
       </div>
-      <div class="inline-flex items-center gap-2.5 bg-white/10 border border-white/20 rounded-full px-5 py-3 backdrop-blur-sm">
-        <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse flex-shrink-0"></span>
-        <span class="font-sans text-white/80 text-sm font-medium">Fri–Mon &nbsp;·&nbsp; Noon–7PM &nbsp;·&nbsp; or until sold out</span>
-      </div>
-      <!-- Hero food photo -->
-      <div class="zoom rounded-3xl shadow-2xl border-4 border-white/20 max-w-xs mx-auto mt-14 -rotate-1 cursor-pointer">
-        <img src="assets/photo2.webp" alt="Pie in the Sky sourdough pizza" class="w-full rounded-3xl" loading="lazy" />
+      <!-- RIGHT: logo + photo stacked -->
+      <div class="flex flex-col items-center gap-6">
+        <img src="assets/design7.png" style="height:120px" class="drop-shadow-2xl" alt="Pie in the Sky Pizza" loading="lazy" />
+        <div class="zoom rounded-3xl shadow-2xl border-4 border-white/20 -rotate-1 cursor-pointer w-full" style="max-width:320px">
+          <img src="assets/photo2.webp" alt="Sourdough pizza" class="w-full rounded-3xl" loading="lazy" />
+        </div>
       </div>
     </div>
   </section>
 
   <!-- SEPARATOR -->
-  <img src="assets/checker-white.png" style="width:100%;height:20px;object-fit:cover;display:block" alt="" loading="lazy" />
+  <img src="assets/awning-yellow.png" style="width:100%;height:10px;object-fit:cover;display:block" alt="" loading="lazy" />
 
   <!-- MARQUEE -->
   <div class="bg-navy py-3 overflow-hidden select-none">
@@ -166,7 +170,7 @@
   </div>
 
   <!-- SEPARATOR -->
-  <img src="assets/checker-white.png" style="width:100%;height:20px;object-fit:cover;display:block" alt="" loading="lazy" />
+  <img src="assets/awning-yellow.png" style="width:100%;height:10px;object-fit:cover;display:block" alt="" loading="lazy" />
 
   <!-- PHOTO STRIP -->
   <div class="grid grid-cols-3" style="height:300px">
@@ -182,7 +186,7 @@
   </div>
 
   <!-- SEPARATOR -->
-  <img src="assets/checker-white.png" style="width:100%;height:20px;object-fit:cover;display:block" alt="" loading="lazy" />
+  <img src="assets/awning-yellow.png" style="width:100%;height:10px;object-fit:cover;display:block" alt="" loading="lazy" />
 
   <!-- MENU -->
   <section id="menu" class="py-24 px-6" style="background-color:#FFFEF7;">
@@ -191,80 +195,16 @@
         <h2 class="font-display text-navy text-5xl mb-2">The Menu</h2>
         <p class="font-serif italic text-blue text-lg">Sourdough · naturally fermented · hand-crafted</p>
       </div>
-      <div class="grid md:grid-cols-2 gap-12 items-start">
-        <!-- Menu list -->
-        <div class="reveal">
-          <p class="font-display text-navy text-2xl mb-4">Slices</p>
-          <div class="space-y-1 mb-8 border-b border-navy/10 pb-8">
-            <div class="mrow flex justify-between py-3 px-3 rounded-lg">
-              <span class="font-serif font-bold text-navy">Cheese</span>
-              <span class="font-sans font-bold text-blue">$5</span>
-            </div>
-            <div class="mrow flex justify-between py-3 px-3 rounded-lg">
-              <span class="font-serif font-bold text-navy">Pepperoni</span>
-              <span class="font-sans font-bold text-blue">$6</span>
-            </div>
-          </div>
-
-          <p class="font-display text-navy text-2xl mb-4">16" Pies</p>
-          <div class="space-y-1 mb-8 border-b border-navy/10 pb-8">
-            <div class="mrow flex justify-between items-start py-3 px-3 rounded-lg">
-              <span class="font-serif font-bold text-navy">Cheese</span>
-              <span class="font-sans font-bold text-blue">$24</span>
-            </div>
-            <div class="mrow flex justify-between items-start py-3 px-3 rounded-lg">
-              <span class="font-serif font-bold text-navy">Cayucos Margherita</span>
-              <span class="font-sans font-bold text-blue">$24</span>
-            </div>
-            <div class="mrow flex justify-between items-start py-3 px-3 rounded-lg border-l-4 border-gold">
-              <div>
-                <span class="font-serif font-bold text-navy">Pepperoni</span>
-                <p class="font-serif italic text-navy/40 text-sm">"the one they judge you by"</p>
-              </div>
-              <span class="font-sans font-bold text-blue ml-4">$25</span>
-            </div>
-            <div class="mrow flex justify-between items-start py-3 px-3 rounded-lg">
-              <div>
-                <span class="font-serif font-bold text-navy">Sausage & Peppers</span>
-                <p class="font-sans text-navy/40 text-xs mt-0.5">Cayucos Sausage Co.</p>
-              </div>
-              <span class="font-sans font-bold text-blue ml-4">$25</span>
-            </div>
-            <div class="mrow flex justify-between items-start py-3 px-3 rounded-lg">
-              <div>
-                <span class="font-serif font-bold text-navy">Mushroom & White Sauce</span>
-                <p class="font-sans text-navy/40 text-xs mt-0.5">Mighty Cap mushrooms</p>
-              </div>
-              <span class="font-sans font-bold text-blue ml-4">$25</span>
-            </div>
-            <div class="mrow flex justify-between items-start py-3 px-3 rounded-lg">
-              <div>
-                <span class="font-serif font-bold text-navy">Rotating Seasonal</span>
-                <a href="https://instagram.com/pieintheskypizzacayucos" target="_blank" class="font-sans text-blue text-xs font-bold hover:underline cursor-pointer">Check @pieintheskycayucos →</a>
-              </div>
-              <span class="font-sans font-bold text-blue ml-4">$25</span>
-            </div>
-          </div>
-
-          <p class="font-display text-navy text-2xl mb-4">Extras</p>
-          <div class="flex flex-wrap gap-2">
-            <span class="bg-navy/8 text-navy font-sans text-sm px-4 py-2 rounded-full">Housemade Ranch</span>
-            <span class="bg-navy/8 text-navy font-sans text-sm px-4 py-2 rounded-full">Hot Honey</span>
-            <span class="bg-navy/8 text-navy font-sans text-sm px-4 py-2 rounded-full">Cayucos Hot Sauce</span>
-            <span class="bg-navy/8 text-navy font-sans text-sm px-4 py-2 rounded-full">Leo Leo Gelato</span>
-          </div>
-          <p class="font-serif italic text-navy/30 text-xs mt-6">Menu subject to change · Check Instagram for today's special</p>
-        </div>
-        <!-- Menu graphic -->
-        <div class="reveal">
-          <img src="assets/menu.png" alt="Pie in the Sky full menu" class="w-full rounded-2xl shadow-lg border border-navy/10 md:sticky md:top-24" loading="lazy" />
-        </div>
+      <!-- Menu graphic only — no duplicate text list -->
+      <div class="reveal max-w-2xl mx-auto">
+        <img src="assets/menu.png" alt="Pie in the Sky full menu" class="w-full rounded-2xl shadow-xl border border-navy/10" loading="lazy" />
+        <p class="font-serif italic text-navy/30 text-xs text-center mt-4">Menu subject to change · Check <a href="https://instagram.com/pieintheskypizzacayucos" target="_blank" class="hover:text-blue underline cursor-pointer">@pieintheskycayucos</a> for today's special</p>
       </div>
     </div>
   </section>
 
   <!-- SEPARATOR -->
-  <img src="assets/checker-white.png" style="width:100%;height:20px;object-fit:cover;display:block" alt="" loading="lazy" />
+  <img src="assets/awning-yellow.png" style="width:100%;height:10px;object-fit:cover;display:block" alt="" loading="lazy" />
 
   <!-- STORY -->
   <section id="story" class="py-24 px-6" style="background-color:#4A6E8B;">
@@ -306,7 +246,7 @@
   </section>
 
   <!-- SEPARATOR -->
-  <img src="assets/checker-white.png" style="width:100%;height:20px;object-fit:cover;display:block" alt="" loading="lazy" />
+  <img src="assets/awning-yellow.png" style="width:100%;height:10px;object-fit:cover;display:block" alt="" loading="lazy" />
 
   <!-- INSTAGRAM -->
   <section class="py-20 px-6 bg-white">
@@ -349,7 +289,7 @@
   </section>
 
   <!-- SEPARATOR -->
-  <img src="assets/checker-white.png" style="width:100%;height:20px;object-fit:cover;display:block" alt="" loading="lazy" />
+  <img src="assets/awning-yellow.png" style="width:100%;height:10px;object-fit:cover;display:block" alt="" loading="lazy" />
 
   <!-- VISIT -->
   <section id="visit" class="py-24 px-6" style="background-color:#4A6E8B;">
@@ -387,7 +327,7 @@
   </section>
 
   <!-- SEPARATOR -->
-  <img src="assets/checker-white.png" style="width:100%;height:20px;object-fit:cover;display:block" alt="" loading="lazy" />
+  <img src="assets/awning-yellow.png" style="width:100%;height:10px;object-fit:cover;display:block" alt="" loading="lazy" />
 
   <!-- FOOTER -->
   <footer class="py-10 px-6" style="background-color:#1A1A2E;">
