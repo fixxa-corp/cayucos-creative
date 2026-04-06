@@ -78,8 +78,24 @@
 </head>
 <body class="font-sans bg-cream text-navy antialiased overflow-x-hidden">
 
-  <!-- AWNING STRIPE -->
-  <img src="assets/awning-yellow.png" style="width:100%;height:12px;object-fit:cover;display:block" alt="" />
+  <!-- AWNING -->
+  <div class="awning-wrap" style="position:relative;z-index:60;line-height:0">
+    <div style="display:flex;width:100%;height:48px;overflow:hidden">
+      <!-- Vertical stripes -->
+      <div style="flex:1;background:repeating-linear-gradient(90deg,#4A6E8B 0px,#4A6E8B 28px,#F0D06B 28px,#F0D06B 56px)"></div>
+    </div>
+    <!-- Scalloped bottom edge -->
+    <svg viewBox="0 0 1440 28" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;margin-top:-1px" preserveAspectRatio="none">
+      <defs>
+        <pattern id="awn" x="0" y="0" width="80" height="28" patternUnits="userSpaceOnUse">
+          <rect width="40" height="28" fill="#4A6E8B"/>
+          <rect x="40" width="40" height="28" fill="#F0D06B"/>
+          <ellipse cx="40" cy="0" rx="40" ry="18" fill="white"/>
+        </pattern>
+      </defs>
+      <rect width="1440" height="28" fill="url(#awn)"/>
+    </svg>
+  </div>
 
   <!-- NAV -->
   <nav class="sticky top-0 z-50 bg-white border-b border-gray-100 shadow-sm">
@@ -97,9 +113,12 @@
   </nav>
 
   <!-- HERO -->
-  <section class="relative min-h-screen flex flex-col items-center justify-center px-6 py-24 text-center overflow-hidden" style="background-color:#4A6E8B;">
+  <section class="relative min-h-screen flex flex-col items-center justify-center px-6 py-28 overflow-hidden" style="background-color:#1A1A2E;">
+    <!-- Full bleed storefront photo -->
     <div class="absolute inset-0 z-0">
-      <img src="assets/bg-blue.webp" alt="" class="w-full h-full object-cover opacity-20" loading="lazy" />
+      <img src="assets/photo3.webp" alt="" class="w-full h-full object-cover" style="object-position:center 30%" loading="lazy" />
+      <!-- Dark gradient overlay for readability -->
+      <div class="absolute inset-0" style="background:linear-gradient(135deg, rgba(26,26,46,0.88) 0%, rgba(74,110,139,0.75) 60%, rgba(26,26,46,0.60) 100%)"></div>
     </div>
     <div class="relative z-10 w-full max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
       <!-- LEFT: text only, no logo -->
@@ -125,18 +144,15 @@
           <span class="font-sans text-white/80 text-sm">Fri–Mon &nbsp;·&nbsp; Noon–7PM &nbsp;·&nbsp; until sold out</span>
         </div>
       </div>
-      <!-- RIGHT: logo + photo stacked -->
-      <div class="flex flex-col items-center gap-6">
-        <img src="assets/design7.png" style="height:120px" class="drop-shadow-2xl" alt="Pie in the Sky Pizza" loading="lazy" />
-        <div class="zoom rounded-3xl shadow-2xl border-4 border-white/20 -rotate-1 cursor-pointer w-full" style="max-width:320px">
-          <img src="assets/photo2.webp" alt="Sourdough pizza" class="w-full rounded-3xl" loading="lazy" />
-        </div>
+      <!-- RIGHT: stars accent only -->
+      <div class="hidden md:flex items-center justify-center">
+        <img src="assets/stars.png" style="height:80px;opacity:.6" alt="" loading="lazy" />
       </div>
     </div>
   </section>
 
-  <!-- SEPARATOR -->
-  <img src="assets/awning-yellow.png" style="width:100%;height:10px;object-fit:cover;display:block" alt="" loading="lazy" />
+  <!-- CHECKER DIVIDER -->
+  <div style="height:20px;background:repeating-conic-gradient(#1A1A2E 0% 25%,#F0D06B 0% 50%) 0 0/20px 20px"></div>
 
   <!-- MARQUEE -->
   <div class="bg-navy py-3 overflow-hidden select-none">
@@ -169,8 +185,8 @@
     </div>
   </div>
 
-  <!-- SEPARATOR -->
-  <img src="assets/awning-yellow.png" style="width:100%;height:10px;object-fit:cover;display:block" alt="" loading="lazy" />
+  <!-- CHECKER DIVIDER -->
+  <div style="height:20px;background:repeating-conic-gradient(#1A1A2E 0% 25%,#F0D06B 0% 50%) 0 0/20px 20px"></div>
 
   <!-- PHOTO STRIP -->
   <div class="grid grid-cols-3" style="height:300px">
@@ -185,8 +201,8 @@
     </div>
   </div>
 
-  <!-- SEPARATOR -->
-  <img src="assets/awning-yellow.png" style="width:100%;height:10px;object-fit:cover;display:block" alt="" loading="lazy" />
+  <!-- CHECKER DIVIDER -->
+  <div style="height:20px;background:repeating-conic-gradient(#1A1A2E 0% 25%,#F0D06B 0% 50%) 0 0/20px 20px"></div>
 
   <!-- MENU -->
   <section id="menu" class="py-24 px-6" style="background-color:#FFFEF7;">
@@ -203,8 +219,8 @@
     </div>
   </section>
 
-  <!-- SEPARATOR -->
-  <img src="assets/awning-yellow.png" style="width:100%;height:10px;object-fit:cover;display:block" alt="" loading="lazy" />
+  <!-- CHECKER DIVIDER -->
+  <div style="height:20px;background:repeating-conic-gradient(#1A1A2E 0% 25%,#F0D06B 0% 50%) 0 0/20px 20px"></div>
 
   <!-- STORY -->
   <section id="story" class="py-24 px-6" style="background-color:#4A6E8B;">
@@ -226,7 +242,7 @@
             <p class="font-serif italic text-white/80 text-lg leading-relaxed">"Pie in the sky — it's about having a crazy dream. We love Dean Martin, That's Amore energy. The moon felt right."</p>
             <p class="font-sans text-sm mt-2" style="color:#F0D06B">— Ellen Sizemore, co-owner</p>
           </blockquote>
-          <div class="grid grid-cols-3 gap-3">
+          <div class="grid grid-cols-3 gap-3 mb-8">
             <div class="bg-white/10 rounded-xl p-4 text-center border border-white/10">
               <p class="font-display text-white text-2xl">2024</p>
               <p class="font-sans text-white/40 text-xs uppercase tracking-wider mt-1">Est.</p>
@@ -240,13 +256,30 @@
               <p class="font-sans text-white/40 text-xs uppercase tracking-wider mt-1">Sourdough Since</p>
             </div>
           </div>
+
+          <!-- Sister businesses -->
+          <p class="font-sans text-white/40 text-xs uppercase tracking-[.2em] mb-3">Part of the family</p>
+          <div class="flex gap-4 flex-wrap">
+            <div class="bg-white/10 border border-white/15 rounded-2xl px-5 py-3 text-center hover:bg-white/20 transition-colors cursor-pointer">
+              <p class="font-display text-white text-base leading-none">Mosey's</p>
+              <p class="font-sans text-white/40 text-xs mt-1">Cayucos</p>
+            </div>
+            <div class="bg-white/10 border border-white/15 rounded-2xl px-5 py-3 text-center hover:bg-white/20 transition-colors cursor-pointer">
+              <p class="font-display text-white text-base leading-none">High Tide Deli</p>
+              <p class="font-sans text-white/40 text-xs mt-1">Morro Bay</p>
+            </div>
+            <div class="bg-white/10 border border-white/15 rounded-2xl px-5 py-3 text-center hover:bg-white/20 transition-colors cursor-pointer">
+              <p class="font-display text-white text-base leading-none">Spearhead Coffee</p>
+              <p class="font-sans text-white/40 text-xs mt-1">Central Coast</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SEPARATOR -->
-  <img src="assets/awning-yellow.png" style="width:100%;height:10px;object-fit:cover;display:block" alt="" loading="lazy" />
+  <!-- CHECKER DIVIDER -->
+  <div style="height:20px;background:repeating-conic-gradient(#1A1A2E 0% 25%,#F0D06B 0% 50%) 0 0/20px 20px"></div>
 
   <!-- INSTAGRAM -->
   <section class="py-20 px-6 bg-white">
@@ -288,8 +321,8 @@
     </div>
   </section>
 
-  <!-- SEPARATOR -->
-  <img src="assets/awning-yellow.png" style="width:100%;height:10px;object-fit:cover;display:block" alt="" loading="lazy" />
+  <!-- CHECKER DIVIDER -->
+  <div style="height:20px;background:repeating-conic-gradient(#1A1A2E 0% 25%,#F0D06B 0% 50%) 0 0/20px 20px"></div>
 
   <!-- VISIT -->
   <section id="visit" class="py-24 px-6" style="background-color:#4A6E8B;">
@@ -326,8 +359,8 @@
     </div>
   </section>
 
-  <!-- SEPARATOR -->
-  <img src="assets/awning-yellow.png" style="width:100%;height:10px;object-fit:cover;display:block" alt="" loading="lazy" />
+  <!-- CHECKER DIVIDER -->
+  <div style="height:20px;background:repeating-conic-gradient(#1A1A2E 0% 25%,#F0D06B 0% 50%) 0 0/20px 20px"></div>
 
   <!-- FOOTER -->
   <footer class="py-10 px-6" style="background-color:#1A1A2E;">
